@@ -5,146 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CariSaja - Pencarian Cerdas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://plugin-code.salesmartly.com/js/project_396939_410823_1753020262.js"></script>
     <style>
         body {
             box-sizing: border-box;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
         }
         
         .search-container {
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
         }
         
-        .result-item {
+        .instruction-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+        }
+        
+        .safety-notice {
+            background: rgba(72, 187, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+        }
+
+        .search-input {
+            background: white;
+            border-radius: 100px;
+            padding: 15px 30px;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+        }
+
+        .search-button {
+            background: #3b82f6;
+            color: white;
+            border-radius: 100px;
+            padding: 15px 40px;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
-        
-        .result-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+        .search-button:hover {
+            background: #2563eb;
         }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+
+        .copyright {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: white;
         }
     </style>
 </head>
-<body class="h-full gradient-bg font-sans">
-    <main class="min-h-full flex flex-col">
-        <!-- Header -->
-        <header class="p-6">
-            <nav class="flex justify-between items-center max-w-6xl mx-auto">
-                <div class="text-white text-2xl font-bold"></div>
-                <div class="hidden md:flex space-x-6 text-white">
-                    <a href="#" id="berandaLink" class="hover:text-blue-200 transition-colors">Beranda</a>
-                    <a href="#" id="tentangLink" class="hover:text-blue-200 transition-colors">Tentang</a>
-                    <a href="#" id="kontakLink" class="hover:text-blue-200 transition-colors">Kontak</a>
-                </div>
-            </nav>
-        </header>
+<body class="min-h-screen font-sans">
+    <header class="p-6">
+        <nav class="flex justify-between items-center max-w-6xl mx-auto">
+            <div class="text-white text-2xl font-bold">CariSaja</div>
+            <div class="flex space-x-6 text-white">
+                <a href="#" class="hover:text-blue-200 transition-colors">Beranda</a>
+                <a href="#" class="hover:text-blue-200 transition-colors">Tentang</a>
+                <a href="#" class="hover:text-blue-200 transition-colors">Kontak</a>
+            </div>
+        </nav>
+    </header>
 
-        <!-- Main Content -->
-        <div class="flex-1 flex items-center justify-center px-6">
-            <div class="w-full max-w-4xl text-center">
-                <!-- Logo/Title -->
-                <div class="mb-8">
-                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">CariSaja</h1>
-                    <p class="text-xl md:text-2xl text-blue-100 mb-6">Temukan apa yang Anda cari dengan mudah</p>
-                    
-                    <!-- Instructions -->
-                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6 text-left max-w-2xl mx-auto">
-                        <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
-                        <ol class="text-blue-100 space-y-2">
-                            <li class="flex items-start">
-                                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
-                                <span>Cari nama situs disini, Contoh: <span class="font-semibold text-white">Nama situs</span></span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
-                                <span>Klik Tombol <span class="font-semibold text-white">"Cari"</span></span>
-                            </li>
-                        </ol>
-                    </div>
-                    
-                    <!-- Safety Notice -->
-                    <div class="bg-green-500/20 backdrop-blur-sm rounded-xl p-4 mb-6 border border-green-400/30">
-                        <div class="flex items-center justify-center mb-2">
-                            <span class="text-2xl mr-2">🛡️</span>
-                            <h4 class="text-lg font-semibold text-green-100">Link ini aman dari pencarian nawala</h4>
-                        </div>
-                        <p class="text-green-100 text-center">
-                            <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
-                        </p>
-                    </div>
+    <main class="flex-1 flex items-center justify-center px-6 mt-20">
+        <div class="w-full max-w-4xl text-center">
+            <h1 class="text-6xl md:text-7xl font-bold text-white mb-4">CariSaja</h1>
+            <p class="text-xl md:text-2xl text-blue-100 mb-10">Temukan apa yang Anda cari dengan mudah</p>
+            
+            <!-- Instructions -->
+            <div class="instruction-box p-6 mb-6 text-left max-w-2xl mx-auto">
+                <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
+                <ol class="text-blue-100 space-y-3">
+                    <li class="flex items-start">
+                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
+                        <span>Ketik kata kunci: <span class="font-semibold text-white">pedang88, facebook, instagram</span>, atau <span class="font-semibold text-white">whatsapp</span></span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
+                        <span>Klik Tombol <span class="font-semibold text-white">"Cari"</span></span>
+                    </li>
+                </ol>
+            </div>
+            
+            <!-- Safety Notice -->
+            <div class="safety-notice p-4 mb-8">
+                <div class="flex items-center justify-center mb-2">
+                    <span class="text-2xl mr-2">🛡️</span>
+                    <h4 class="text-lg font-semibold text-white">Link ini aman dari pencarian nawala</h4>
                 </div>
+                <p class="text-blue-100 text-center">
+                    <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
+                </p>
+            </div>
 
-                <!-- Search Box -->
-                <div class="search-container rounded-2xl p-8 mb-8 border border-white/20">
-                    <form id="searchForm" class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1">
-                            <label for="searchInput" class="sr-only">Kata kunci pencarian</label>
-                            <input 
-                                type="text" 
-                                id="searchInput"
-                                placeholder="Masukkan kata kunci pencarian..."
-                                class="w-full px-6 py-4 text-lg rounded-xl border-0 focus:ring-4 focus:ring-blue-300 focus:outline-none"
-                                required
-                            >
-                        </div>
-                        <button 
-                            type="submit"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl transition-colors flex items-center justify-center gap-2"
-                        >
-                            <span>Cari</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Search Results -->
-                <div id="searchResults" class="space-y-4 text-left">
-                    <!-- Results will be populated here -->
-                </div>
+            <!-- Search Box -->
+            <div class="search-container p-2 mb-8">
+                <form id="searchForm" class="flex items-center gap-4 p-2">
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Masukkan kata kunci pencarian..."
+                        required
+                    >
+                    <button 
+                        type="submit"
+                        class="search-button flex items-center gap-2 whitespace-nowrap"
+                    >
+                        <span class="relative -top-px">•</span>
+                        <span>Cari</span>
+                    </button>
+                </form>
             </div>
         </div>
     </main>
+
+    <footer class="copyright">
+        © 2024 CariSaja. Semua hak dilindungi.
+    </footer>
 
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const searchTerm = document.getElementById('searchInput').value;
-            
-            // Lakukan pencarian di sini
             const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`;
             window.open(searchUrl, '_blank');
-        });
-
-        // Fungsi untuk menu navigasi
-        document.getElementById('berandaLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Tambahkan fungsi untuk halaman beranda
-        });
-
-        document.getElementById('tentangLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Tambahkan fungsi untuk halaman tentang
-        });
-
-        document.getElementById('kontakLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Tambahkan fungsi untuk halaman kontak
         });
     </script>
 </body>

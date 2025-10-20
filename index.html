@@ -15,6 +15,7 @@
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.1);
             border-radius: 30px;
+            padding: 10px;
         }
         
         .instruction-box {
@@ -36,19 +37,41 @@
             width: 100%;
             border: none;
             font-size: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .search-button {
-            background: #3b82f6;
+            background: #2563eb;
             color: white;
             border-radius: 100px;
             padding: 15px 40px;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .search-button .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 5px;
         }
 
         .search-button:hover {
-            background: #2563eb;
+            background: #1d4ed8;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+            padding: 5px;
+            align-items: center;
         }
 
         .copyright {
@@ -104,8 +127,8 @@
             </div>
 
             <!-- Search Box -->
-            <div class="search-container p-2 mb-8">
-                <form id="searchForm" class="flex items-center gap-4 p-2">
+            <div class="search-container mb-8">
+                <form id="searchForm" class="search-form">
                     <input 
                         type="text" 
                         id="searchInput"
@@ -113,12 +136,9 @@
                         placeholder="Masukkan kata kunci pencarian..."
                         required
                     >
-                    <button 
-                        type="submit"
-                        class="search-button flex items-center gap-2 whitespace-nowrap"
-                    >
-                        <span class="relative -top-px">•</span>
-                        <span>Cari</span>
+                    <button type="submit" class="search-button">
+                        <span class="dot"></span>
+                        Cari
                     </button>
                 </form>
             </div>

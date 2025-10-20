@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CariSaja - Pencarian Cerdas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://plugin-code.salesmartly.com/js/project_396939_410823_1753020262.js"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .search-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .result-item {
+            transition: all 0.3s ease;
+        }
+        
+        .result-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="h-full gradient-bg font-sans">
+    <main class="min-h-full flex flex-col">
+        <!-- Header -->
+        <header class="p-6">
+            <nav class="flex justify-between items-center max-w-6xl mx-auto">
+                <div class="text-white text-2xl font-bold"></div>
+                <div class="hidden md:flex space-x-6 text-white">
+                    <a href="#" id="berandaLink" class="hover:text-blue-200 transition-colors">Beranda</a>
+                    <a href="#" id="tentangLink" class="hover:text-blue-200 transition-colors">Tentang</a>
+                    <a href="#" id="kontakLink" class="hover:text-blue-200 transition-colors">Kontak</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex items-center justify-center px-6">
+            <div class="w-full max-w-4xl text-center">
+                <!-- Logo/Title -->
+                <div class="mb-8">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">CariSaja</h1>
+                    <p class="text-xl md:text-2xl text-blue-100 mb-6">Temukan apa yang Anda cari dengan mudah</p>
+                    
+                    <!-- Instructions -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6 text-left max-w-2xl mx-auto">
+                        <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
+                        <ol class="text-blue-100 space-y-2">
+                            <li class="flex items-start">
+                                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
+                                <span>Cari nama situs disini, Contoh: <span class="font-semibold text-white">Nama situs</span></span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
+                                <span>Klik Tombol <span class="font-semibold text-white">"Cari"</span></span>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Safety Notice -->
+                    <div class="bg-green-500/20 backdrop-blur-sm rounded-xl p-4 mb-6 border border-green-400/30">
+                        <div class="flex items-center justify-center mb-2">
+                            <span class="text-2xl mr-2">🛡️</span>
+                            <h4 class="text-lg font-semibold text-green-100">Link ini aman dari pencarian nawala</h4>
+                        </div>
+                        <p class="text-green-100 text-center">
+                            <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Search Box -->
+                <div class="search-container rounded-2xl p-8 mb-8 border border-white/20">
+                    <form id="searchForm" class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <label for="searchInput" class="sr-only">Kata kunci pencarian</label>
+                            <input 
+                                type="text" 
+                                id="searchInput"
+                                placeholder="Masukkan kata kunci pencarian..."
+                                class="w-full px-6 py-4 text-lg rounded-xl border-0 focus:ring-4 focus:ring-blue-300 focus:outline-none"

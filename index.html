@@ -7,152 +7,133 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            box-sizing: border-box;
             background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
-        }
-        
-        .search-container {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 10px;
+            min-height: 100vh;
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
         }
         
         .instruction-box {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
             border-radius: 20px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
         }
         
         .safety-notice {
-            background: rgba(72, 187, 255, 0.2);
+            background: rgba(0, 153, 255, 0.1);
             backdrop-filter: blur(5px);
-            border-radius: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .search-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 10px;
+            margin: 20px auto;
+            max-width: 800px;
         }
 
         .search-input {
             background: white;
-            border-radius: 100px;
-            padding: 15px 30px;
-            width: 100%;
             border: none;
+            border-radius: 25px;
+            padding: 15px 25px;
+            width: 100%;
             font-size: 16px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            outline: none;
         }
 
         .search-button {
-            background: #2563eb;
+            background: #0066ff;
             color: white;
-            border-radius: 100px;
-            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            cursor: pointer;
             font-weight: 500;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 5px;
-            min-width: 120px;
-            justify-content: center;
         }
 
-        .search-button .dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: white;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-
-        .search-button:hover {
-            background: #1d4ed8;
-        }
-
-        .search-form {
-            display: flex;
-            gap: 10px;
-            padding: 5px;
-            align-items: center;
-        }
-
-        .copyright {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
+        .search-button::before {
+            content: "•";
             color: white;
+        }
+
+        .number-circle {
+            background: #0066ff;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
         }
     </style>
 </head>
-<body class="min-h-screen font-sans">
-    <header class="p-6">
-        <nav class="flex justify-between items-center max-w-6xl mx-auto">
-            <div class="text-white text-2xl font-bold">CariSaja</div>
-            <div class="flex space-x-6 text-white">
-                <a href="#" class="hover:text-blue-200 transition-colors">Beranda</a>
-                <a href="#" class="hover:text-blue-200 transition-colors">Tentang</a>
-                <a href="#" class="hover:text-blue-200 transition-colors">Kontak</a>
-            </div>
-        </nav>
-    </header>
+<body>
+    <nav class="flex justify-end p-4 text-white gap-6">
+        <a href="#" class="hover:text-blue-200">Beranda</a>
+        <a href="#" class="hover:text-blue-200">Tentang</a>
+        <a href="#" class="hover:text-blue-200">Kontak</a>
+    </nav>
 
-    <main class="flex-1 flex items-center justify-center px-6 mt-20">
-        <div class="w-full max-w-4xl text-center">
-            <h1 class="text-6xl md:text-7xl font-bold text-white mb-4">CariSaja</h1>
-            <p class="text-xl md:text-2xl text-blue-100 mb-10">Temukan apa yang Anda cari dengan mudah</p>
-            
-            <!-- Instructions -->
-            <div class="instruction-box p-6 mb-6 text-left max-w-2xl mx-auto">
-                <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
-                <ol class="text-blue-100 space-y-3">
-                    <li class="flex items-start">
-                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
-                        <span>Ketik kata kunci: <span class="font-semibold text-white">pedang88, facebook, instagram</span>, atau <span class="font-semibold text-white">whatsapp</span></span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
-                        <span>Klik Tombol <span class="font-semibold text-white">"Cari"</span></span>
-                    </li>
-                </ol>
-            </div>
-            
-            <!-- Safety Notice -->
-            <div class="safety-notice p-4 mb-8">
-                <div class="flex items-center justify-center mb-2">
-                    <span class="text-2xl mr-2">🛡️</span>
-                    <h4 class="text-lg font-semibold text-white">Link ini aman dari pencarian nawala</h4>
+    <main class="container mx-auto px-4 text-center mt-20">
+        <h1 class="text-6xl font-bold text-white mb-4">CariSaja</h1>
+        <p class="text-2xl text-white mb-10">Temukan apa yang Anda cari dengan mudah</p>
+        
+        <div class="instruction-box text-left">
+            <h3 class="text-white font-semibold mb-4">📋 Cara Menggunakan:</h3>
+            <div class="space-y-3 text-white">
+                <div class="flex items-center">
+                    <div class="number-circle">1</div>
+                    <span>Cari nama situs disini, Contoh: <span class="font-medium">Nama situs</span></span>
                 </div>
-                <p class="text-blue-100 text-center">
-                    <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
-                </p>
-            </div>
-
-            <!-- Search Box -->
-            <div class="search-container mb-8">
-                <form id="searchForm" class="search-form">
-                    <input 
-                        type="text" 
-                        id="searchInput"
-                        class="search-input"
-                        placeholder="Masukkan kata kunci pencarian..."
-                        required
-                    >
-                    <button type="submit" class="search-button">
-                        <span class="dot"></span>
-                        Cari
-                    </button>
-                </form>
+                <div class="flex items-center">
+                    <div class="number-circle">2</div>
+                    <span>Klik Tombol "Cari"</span>
+                </div>
             </div>
         </div>
-    </main>
+        
+        <div class="safety-notice">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <span class="text-xl">🛡️</span>
+                <h4 class="text-white font-semibold">Link ini aman dari pencarian nawala</h4>
+            </div>
+            <p class="text-white text-center">
+                <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
+            </p>
+        </div>
 
-    <footer class="copyright">
-        © 2024 CariSaja. Semua hak dilindungi.
-    </footer>
+        <div class="search-container">
+            <form id="searchForm" class="flex gap-4">
+                <input 
+                    type="text" 
+                    class="search-input"
+                    placeholder="Masukkan kata kunci pencarian..."
+                    required
+                >
+                <button type="submit" class="search-button whitespace-nowrap">Cari</button>
+            </form>
+        </div>
+    </main>
 
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const searchTerm = document.getElementById('searchInput').value;
+            const searchTerm = document.querySelector('.search-input').value;
             const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`;
             window.open(searchUrl, '_blank');
         });

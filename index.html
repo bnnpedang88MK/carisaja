@@ -245,4 +245,270 @@
                         </div>
                     </div>
 
- (file truncated for brevity)
+<div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600">💌 Kirim Pesan</h3>
+                        <form id="contactForm" class="space-y-4">
+                            <div>
+                                <label for="contactName" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                                <input type="text" id="contactName" name="name" required 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="contactEmail" name="email" required 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="contactSubject" class="block text-sm font-medium text-gray-700 mb-1">Subjek</label>
+                                <select id="contactSubject" name="subject" required 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="">Pilih subjek...</option>
+                                    <option value="feedback">Feedback & Saran</option>
+                                    <option value="bug">Laporkan Bug</option>
+                                    <option value="partnership">Kerjasama</option>
+                                    <option value="other">Lainnya</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="contactMessage" class="block text-sm font-medium text-gray-700 mb-1">Pesan</label>
+                                <textarea id="contactMessage" name="message" rows="4" required 
+                                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                          placeholder="Tulis pesan Anda di sini..."></textarea>
+                            </div>
+                            <button type="submit" 
+                                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                                📤 Kirim Pesan
+                            </button>
+                        </form>
+                        
+                        <div id="contactSuccess" class="hidden mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                            ✅ Pesan berhasil dikirim! Kami akan merespons dalam 1x24 jam.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Footer -->
+        <footer class="p-6 text-center text-blue-100">
+            <p>&copy; 2024 CariSaja. Semua hak dilindungi.</p>
+        </footer>
+    </main>
+
+    <script>
+
+
+        const searchInput = document.getElementById('searchInput');
+
+        // Keyword mapping untuk pencarian khusus - hanya 3 kunci yang diizinkan
+        const keywordLinks = {
+            'pedang88': 'https://driftdazzle.com/?action=register&rc=HA5TC5E6UG&ci=135', // Ganti dengan link Anda
+            'facebook': 'https://www.facebook.com/Mika.pdg/', // Ganti dengan link Anda
+            'instagram': 'https://www.instagram.com/mikasapdg88/' // Ganti dengan link Anda
+        };
+
+        // Handle direct search button
+        document.getElementById('directSearchBtn').addEventListener('click', function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            if (searchTerm === '') {
+                // Jika kosong, tampilkan pesan
+                showSearchMessage('⚠️ Silakan masukkan kata kunci pencarian terlebih dahulu!', 'warning');
+                return;
+            }
+            
+            // Cek apakah kata kunci ada dalam mapping
+            if (keywordLinks[searchTerm]) {
+                showSearchMessage(`🎯 Mengarahkan ke ${searchTerm}...`, 'success');
+                setTimeout(() => {
+                    window.open(keywordLinks[searchTerm], '_blank', 'noopener,noreferrer');
+                }, 1000);
+            } else {
+                // Jika tidak ada, tampilkan pesan kata kunci yang tersedia
+                showAvailableKeywords();
+            }
+        });
+
+        // Function untuk menampilkan pesan pencarian
+        function showSearchMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-100 border-green-400 text-green-700' : 
+                           type === 'warning' ? 'bg-yellow-100 border-yellow-400 text-yellow-700' : 
+                           'bg-blue-100 border-blue-400 text-blue-700';
+            
+            messageDiv.className = `fixed top-4 right-4 z-50 p-4 rounded-lg border ${bgColor} shadow-lg max-w-sm`;
+            messageDiv.innerHTML = `
+                <div class="flex items-center">
+                    <span class="mr-2">${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-auto text-lg font-bold hover:opacity-70">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Function untuk menampilkan kata kunci yang tersedia
+        function showAvailableKeywords() {
+            const availableKeywords = Object.keys(keywordLinks);
+            const keywordList = availableKeywords.map(keyword => `<span class="bg-blue-500 text-white px-2 py-1 rounded text-sm">${keyword}</span>`).join(' ');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'fixed top-4 right-4 z-50 p-4 rounded-lg border bg-red-100 border-red-400 text-red-700 shadow-lg max-w-md';
+            messageDiv.innerHTML = `
+                <div>
+                    <div class="flex items-start">
+                        <div class="flex-1">
+                            <p class="font-semibold mb-2">❌ Kata kunci tidak ditemukan!</p>
+                            <p class="text-sm mb-3">Kata kunci yang tersedia:</p>
+                            <div class="space-y-2">${keywordList}</div>
+                        </div>
+                        <button onclick="this.parentElement.parentElement.parentElement.remove()" class="ml-2 text-lg font-bold hover:opacity-70">×</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Auto remove after 8 seconds
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 8000);
+        }
+
+        // Handle Enter key in search input
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('directSearchBtn').click();
+            }
+        });
+
+        // Navigation links mapping - Ganti dengan link Anda
+        const navigationLinks = {
+            beranda: 'https://www.facebook.com/groups/pedang88pagcor',    // Ganti dengan link beranda Anda
+            tentang: 'https://driftdazzle.com/id/games/sv388-cock-fight',    // Ganti dengan link tentang Anda  
+            kontak: 'https://api.whatsapp.com/send/?phone=6281384089220&text&type=phone_number&app_absent=0',  // Ganti dengan link kontak Anda
+        };
+
+        // Handle navigation links
+        document.getElementById('berandaLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open(navigationLinks.beranda, '_blank', 'noopener,noreferrer');
+        });
+
+        document.getElementById('tentangLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open(navigationLinks.tentang, '_blank', 'noopener,noreferrer');
+        });
+
+        document.getElementById('kontakLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open(navigationLinks.kontak, '_blank', 'noopener,noreferrer');
+        });
+
+
+
+
+
+
+
+
+
+
+
+        // Navigation functions
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            hideAllSections();
+        }
+
+        function showAbout() {
+            hideAllSections();
+            document.getElementById('aboutSection').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showContact() {
+            hideAllSections();
+            document.getElementById('contactSection').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function hideAllSections() {
+            document.getElementById('aboutSection').classList.add('hidden');
+            document.getElementById('contactSection').classList.add('hidden');
+        }
+
+        // Close buttons functionality
+        document.getElementById('closeAbout').addEventListener('click', function() {
+            document.getElementById('aboutSection').classList.add('hidden');
+        });
+
+        document.getElementById('closeContact').addEventListener('click', function() {
+            document.getElementById('contactSection').classList.add('hidden');
+        });
+
+        // Contact form functionality
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '⏳ Mengirim...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('contactSuccess').classList.remove('hidden');
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('contactSuccess').classList.add('hidden');
+                }, 5000);
+                
+                // Create mailto link as fallback
+                const mailtoLink = `mailto:info@carisaja.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`)}`;
+                
+                // Open email client
+                setTimeout(() => {
+                    window.open(mailtoLink, '_blank');
+                }, 1000);
+                
+            }, 2000);
+        });
+
+        // Focus on search input when page loads
+        window.addEventListener('load', function() {
+            searchInput.focus();
+            
+
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9912120f661e8514',t:'MTc2MDg5NTczMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

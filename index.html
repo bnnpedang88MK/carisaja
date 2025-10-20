@@ -4,28 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CariSaja - Pencarian Cerdas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://plugin-code.salesmartly.com/js/project_396939_410823_1753020262.js"></script>
     <style>
         body {
             box-sizing: border-box;
         }
+        
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
+        
         .search-container {
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.1);
         }
+        
         .result-item {
             transition: all 0.3s ease;
         }
+        
         .result-item:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
+        
         .pulse-animation {
             animation: pulse 2s infinite;
         }
+        
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
@@ -95,7 +102,7 @@
                             >
                         </div>
                         <button 
-                            type="submit"
+                            type="button"
                             id="directSearchBtn"
                             class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors focus:ring-4 focus:ring-blue-300 focus:outline-none"
                         >
@@ -104,10 +111,11 @@
                     </form>
                 </div>
 
+
             </div>
         </div>
 
-        <!-- Search Results (kept for future use) -->
+        <!-- Search Results -->
         <div id="resultsSection" class="hidden bg-white/95 backdrop-blur-sm">
             <div class="max-w-6xl mx-auto p-6">
                 <div class="flex justify-between items-center mb-6">
@@ -136,8 +144,51 @@
                         ✕ Tutup
                     </button>
                 </div>
-
-               
+                
+                <div class="prose max-w-none text-gray-700">
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600">🎯 Misi Kami</h3>
+                            <p class="mb-4">CariSaja hadir untuk memudahkan Anda menemukan informasi yang dibutuhkan dengan cepat dan akurat. Kami menyediakan platform pencarian yang aman, bebas nawala, dan mudah digunakan.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600">🔍 Fitur Unggulan</h3>
+                            <ul class="space-y-2">
+                                <li>✅ Pencarian multi-kategori (Web, Gambar, Video, Berita)</li>
+                                <li>✅ Interface yang user-friendly</li>
+                                <li>✅ Hasil pencarian yang relevan</li>
+                                <li>✅ Aman dari nawala dan error</li>
+                                <li>✅ Akses gratis tanpa registrasi</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600">🛡️ Keamanan & Privasi</h3>
+                        <p>Kami berkomitmen menjaga privasi pengguna. CariSaja tidak menyimpan riwayat pencarian pribadi dan memastikan semua link yang disediakan aman untuk diakses.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600">📊 Statistik Platform</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold">1000+</div>
+                                <div class="text-sm">Pencarian Harian</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-green-500 to-blue-600 text-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold">99.9%</div>
+                                <div class="text-sm">Uptime</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-purple-500 to-pink-600 text-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold">4.8/5</div>
+                                <div class="text-sm">Rating Pengguna</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
         <!-- Footer -->
         <footer class="p-6 text-center text-blue-100">
             <p>&copy; 2024 CariSaja. Semua hak dilindungi.</p>
@@ -145,86 +196,206 @@
     </main>
 
     <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const searchForm = document.getElementById('searchForm');
 
-            // Keyword mapping untuk pencarian khusus
-            const keywordLinks = {
-                'pedang88': 'https://driftdazzle.com/?action=register&rc=HA5TC5E6UG&ci=135',
-                'facebook': 'https://www.facebook.com/Mika.pdg/',
-                'instagram': 'https://www.instagram.com/mikasapdg88/'
-            };
+        const searchInput = document.getElementById('searchInput');
 
-            // Handle form submit (langsung buka link atau pencarian Google jika tidak ada di mapping)
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const searchTerm = (searchInput.value || '').trim().toLowerCase();
-                if (!searchTerm) {
-                    searchInput.focus();
-                    return;
+        // Keyword mapping untuk pencarian khusus - hanya 3 kunci yang diizinkan
+        const keywordLinks = {
+            'pedang88': 'https://driftdazzle.com/?action=register&rc=HA5TC5E6UG&ci=135', // Ganti dengan link Anda
+            'facebook': 'https://www.facebook.com/Mika.pdg/', // Ganti dengan link Anda
+            'instagram': 'https://www.instagram.com/mikasapdg88/' // Ganti dengan link Anda
+        };
+
+        // Handle direct search button
+        document.getElementById('directSearchBtn').addEventListener('click', function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            if (searchTerm === '') {
+                // Jika kosong, tampilkan pesan
+                showSearchMessage('⚠️ Silakan masukkan kata kunci pencarian terlebih dahulu!', 'warning');
+                return;
+            }
+            
+            // Cek apakah kata kunci ada dalam mapping
+            if (keywordLinks[searchTerm]) {
+                showSearchMessage(`🎯 Mengarahkan ke ${searchTerm}...`, 'success');
+                setTimeout(() => {
+                    window.open(keywordLinks[searchTerm], '_blank', 'noopener,noreferrer');
+                }, 1000);
+            } else {
+                // Jika tidak ada, tampilkan pesan kata kunci yang tersedia
+                showAvailableKeywords();
+            }
+        });
+
+        // Function untuk menampilkan pesan pencarian
+        function showSearchMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-100 border-green-400 text-green-700' : 
+                           type === 'warning' ? 'bg-yellow-100 border-yellow-400 text-yellow-700' : 
+                           'bg-blue-100 border-blue-400 text-blue-700';
+            
+            messageDiv.className = `fixed top-4 right-4 z-50 p-4 rounded-lg border ${bgColor} shadow-lg max-w-sm`;
+            messageDiv.innerHTML = `
+                <div class="flex items-center">
+                    <span class="mr-2">${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-auto text-lg font-bold hover:opacity-70">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
                 }
+            }, 5000);
+        }
 
-                const targetUrl = keywordLinks[searchTerm] || ('https://www.google.com/search?q=' + encodeURIComponent(searchTerm));
-                // buka link dengan elemen anchor agar lebih kompatibel dengan popup blockers
-                const a = document.createElement('a');
-                a.href = targetUrl;
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            });
+        // Function untuk menampilkan kata kunci yang tersedia
+        function showAvailableKeywords() {
+            const availableKeywords = Object.keys(keywordLinks);
+            const keywordList = availableKeywords.map(keyword => `<span class="bg-blue-500 text-white px-2 py-1 rounded text-sm">${keyword}</span>`).join(' ');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'fixed top-4 right-4 z-50 p-4 rounded-lg border bg-red-100 border-red-400 text-red-700 shadow-lg max-w-md';
+            messageDiv.innerHTML = `
+                <div>
+                    <div class="flex items-start">
+                        <div class="flex-1">
+                            <p class="font-semibold mb-2">❌ Kata kunci tidak ditemukan!</p>
+                            <p class="text-sm mb-3">Kata kunci yang tersedia:</p>
+                            <div class="space-y-2">${keywordList}</div>
+                        </div>
+                        <button onclick="this.parentElement.parentElement.parentElement.remove()" class="ml-2 text-lg font-bold hover:opacity-70">×</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Auto remove after 8 seconds
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 8000);
+        }
 
-            // Navigation links mapping
-            const navigationLinks = {
-                beranda: 'https://www.facebook.com/groups/pedang88pagcor',
-                tentang: 'https://driftdazzle.com/id/games/sv388-cock-fight',
-                kontak: 'https://api.whatsapp.com/send/?phone=6281384089220&text&type=phone_number&app_absent=0',
-            };
-
-            function openLink(url) {
-                const a = document.createElement('a');
-                a.href = url;
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
+        // Handle Enter key in search input
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('directSearchBtn').click();
             }
+        });
 
-            document.getElementById('berandaLink').addEventListener('click', function(e) {
-                e.preventDefault();
-                openLink(navigationLinks.beranda);
-            });
+        // Navigation links mapping - Ganti dengan link Anda
+        const navigationLinks = {
+            beranda: 'https://www.facebook.com/groups/pedang88pagcor',    // Ganti dengan link beranda Anda
+            tentang: 'https://driftdazzle.com/id/games/sv388-cock-fight',    // Ganti dengan link tentang Anda  
+            kontak: 'https://api.whatsapp.com/send/?phone=6281384089220&text&type=phone_number&app_absent=0',  // Ganti dengan link kontak Anda
+        };
 
-            document.getElementById('tentangLink').addEventListener('click', function(e) {
-                e.preventDefault();
-                openLink(navigationLinks.tentang);
-            });
+        // Handle navigation links
+        document.getElementById('berandaLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open(navigationLinks.beranda, '_blank', 'noopener,noreferrer');
+        });
 
-            document.getElementById('kontakLink').addEventListener('click', function(e) {
-                e.preventDefault();
-                openLink(navigationLinks.kontak);
-            });
+        document.getElementById('tentangLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open(navigationLinks.tentang, '_blank', 'noopener,noreferrer');
+        });
 
-            // About & Contact section controls
-            function hideAllSections() {
-                document.getElementById('aboutSection').classList.add('hidden');
-                document.getElementById('contactSection').classList.add('hidden');
-            }
+        document.getElementById('kontakLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open(navigationLinks.kontak, '_blank', 'noopener,noreferrer');
+        });
 
-            document.getElementById('closeAbout').addEventListener('click', function() {
-                document.getElementById('aboutSection').classList.add('hidden');
-            });
+        // Navigation functions
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            hideAllSections();
+        }
 
-            document.getElementById('closeContact').addEventListener('click', function() {
-                document.getElementById('contactSection').classList.add('hidden');
-            });
+        function showAbout() {
+            hideAllSections();
+            document.getElementById('aboutSection').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-            // Focus on search input when page loads
+        function showContact() {
+            hideAllSections();
+            document.getElementById('contactSection').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function hideAllSections() {
+            document.getElementById('aboutSection').classList.add('hidden');
+            document.getElementById('contactSection').classList.add('hidden');
+        }
+
+        // Close buttons functionality
+        document.getElementById('closeAbout').addEventListener('click', function() {
+            document.getElementById('aboutSection').classList.add('hidden');
+        });
+
+        document.getElementById('closeContact').addEventListener('click', function() {
+            document.getElementById('contactSection').classList.add('hidden');
+        });
+
+        // Contact form functionality
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '⏳ Mengirim...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('contactSuccess').classList.remove('hidden');
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('contactSuccess').classList.add('hidden');
+                }, 5000);
+                
+                // Create mailto link as fallback
+                const mailtoLink = `mailto:info@carisaja.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`)}`;
+                
+                // Open email client
+                setTimeout(() => {
+                    window.open(mailtoLink, '_blank');
+                }, 1000);
+                
+            }, 2000);
+        });
+
+        // Focus on search input when page loads
+        window.addEventListener('load', function() {
             searchInput.focus();
+            
+
         });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9912120f661e8514',t:'MTc2MDg5NTczMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

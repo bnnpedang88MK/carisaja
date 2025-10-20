@@ -8,136 +8,241 @@
     <script src="https://plugin-code.salesmartly.com/js/project_396939_410823_1753020262.js"></script>
     <style>
         body {
-            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
-            min-height: 100vh;
-            margin: 0;
-            font-family: system-ui, -apple-system, sans-serif;
+            box-sizing: border-box;
         }
         
-        .instruction-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 600px;
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
-        .safety-notice {
-            background: rgba(0, 153, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 600px;
-        }
-
         .search-container {
-            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 10px;
-            margin: 20px auto;
-            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
         }
-
-        .search-input {
-            background: white;
-            border: none;
-            border-radius: 25px;
-            padding: 15px 25px;
-            width: 100%;
-            font-size: 16px;
-            outline: none;
+        
+        .result-item {
+            transition: all 0.3s ease;
         }
-
-        .search-button {
-            background: #0066ff;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 15px 30px;
-            cursor: pointer;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        
+        .result-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-
-        .search-button::before {
-            content: "•";
-            color: white;
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
         }
-
-        .number-circle {
-            background: #0066ff;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
     </style>
 </head>
-<body>
-    <nav class="flex justify-end p-4 text-white gap-6">
-        <a href="#" class="hover:text-blue-200">Beranda</a>
-        <a href="#" class="hover:text-blue-200">Tentang</a>
-        <a href="#" class="hover:text-blue-200">Kontak</a>
-    </nav>
-
-    <main class="container mx-auto px-4 text-center mt-20">
-        <h1 class="text-6xl font-bold text-white mb-4">CariSaja</h1>
-        <p class="text-2xl text-white mb-10">Temukan apa yang Anda cari dengan mudah</p>
-        
-        <div class="instruction-box text-left">
-            <h3 class="text-white font-semibold mb-4">📋 Cara Menggunakan:</h3>
-            <div class="space-y-3 text-white">
-                <div class="flex items-center">
-                    <div class="number-circle">1</div>
-                    <span>Cari nama situs disini, Contoh: <span class="font-medium">Nama situs</span></span>
+<body class="h-full gradient-bg font-sans">
+    <main class="min-h-full flex flex-col">
+        <!-- Header -->
+        <header class="p-6">
+            <nav class="flex justify-between items-center max-w-6xl mx-auto">
+                <div class="text-white text-2xl font-bold"></div>
+                <div class="hidden md:flex space-x-6 text-white">
+                    <a href="#" id="berandaLink" class="hover:text-blue-200 transition-colors">Beranda</a>
+                    <a href="#" id="tentangLink" class="hover:text-blue-200 transition-colors">Tentang</a>
+                    <a href="#" id="kontakLink" class="hover:text-blue-200 transition-colors">Kontak</a>
                 </div>
-                <div class="flex items-center">
-                    <div class="number-circle">2</div>
-                    <span>Klik Tombol "Cari"</span>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex items-center justify-center px-6">
+            <div class="w-full max-w-4xl text-center">
+                <!-- Logo/Title -->
+                <div class="mb-8">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">CariSaja</h1>
+                    <p class="text-xl md:text-2xl text-blue-100 mb-6">Temukan apa yang Anda cari dengan mudah</p>
+                    
+                    <!-- Instructions -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6 text-left max-w-2xl mx-auto">
+                        <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
+                        <ol class="text-blue-100 space-y-2">
+                            <li class="flex items-start">
+                                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
+                                <span>Cari nama situs disini, Contoh: <span class="font-semibold text-white">Nama situs</span></span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
+                                <span>Klik Tombol <span class="font-semibold text-white">"Cari"</span></span>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Safety Notice -->
+                    <div class="bg-green-500/20 backdrop-blur-sm rounded-xl p-4 mb-6 border border-green-400/30">
+                        <div class="flex items-center justify-center mb-2">
+                            <span class="text-2xl mr-2">🛡️</span>
+                            <h4 class="text-lg font-semibold text-green-100">Link ini aman dari pencarian nawala</h4>
+                        </div>
+                        <p class="text-green-100 text-center">
+                            <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Search Box -->
+                <div class="search-container rounded-2xl p-8 mb-8 border border-white/20">
+                    <form id="searchForm" class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <label for="searchInput" class="sr-only">Kata kunci pencarian</label>
+                            <input 
+                                type="text" 
+                                id="searchInput"
+                                placeholder="Masukkan kata kunci pencarian..."
+                                class="w-full px-6 py-4 text-lg rounded-xl border-0 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+                                required
+                            >
+                        </div>
+                        <button 
+                            type="button"
+                            id="directSearchBtn"
+                            class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors focus:ring-4 focus:ring-blue-300 focus:outline-none"
+                        >
+                            🔍 Cari
+                        </button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <div id="resultsSection" class="hidden bg-white/95 backdrop-blur-sm">
+            <div class="max-w-6xl mx-auto p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Hasil Pencarian</h2>
+                    <button id="clearResults" class="text-blue-600 hover:text-blue-800 font-medium">
+                        ✕ Tutup
+                    </button>
+                </div>
+                
+                <div id="searchResults" class="grid gap-4 md:gap-6">
+                    <!-- Results will be populated here -->
+                </div>
+                
+                <div id="loadingIndicator" class="hidden text-center py-8">
+                    <div class="pulse-animation text-blue-600 text-lg">🔍 Mencari...</div>
                 </div>
             </div>
         </div>
-        
-        <div class="safety-notice">
-            <div class="flex items-center justify-center gap-2 mb-2">
-                <span class="text-xl">🛡️</span>
-                <h4 class="text-white font-semibold">Link ini aman dari pencarian nawala</h4>
+
+        <!-- About Section -->
+        <div id="aboutSection" class="hidden bg-white/95 backdrop-blur-sm">
+            <div class="max-w-4xl mx-auto p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">Tentang CariSaja</h2>
+                    <button id="closeAbout" class="text-blue-600 hover:text-blue-800 font-medium text-xl">
+                        ✕ Tutup
+                    </button>
+                </div>
+
+                <div class="prose max-w-none text-gray-700">
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600">🎯 Misi Kami</h3>
+                            <p class="mb-4">CariSaja hadir untuk memudahkan Anda menemukan informasi yang dibutuhkan dengan cepat dan akurat. Kami menyediakan platform pencarian yang aman, bebas nawala, dan mudah digunakan.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600">🔍 Fitur Unggulan</h3>
+                            <ul class="space-y-2">
+                                <li>✅ Pencarian multi-kategori (Web, Gambar, Video, Berita)</li>
+                                <li>✅ Interface yang user-friendly</li>
+                                <li>✅ Hasil pencarian yang relevan</li>
+                                <li>✅ Aman dari nawala dan error</li>
+                                <li>✅ Akses gratis tanpa registrasi</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600">🛡️ Keamanan & Privasi</h3>
+                        <p>Kami berkomitmen menjaga privasi pengguna. CariSaja tidak menyimpan riwayat pencarian pribadi dan memastikan semua link yang disediakan aman untuk diakses.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600">📊 Statistik Platform</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold">1000+</div>
+                                <div class="text-sm">Pencarian Harian</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-green-500 to-blue-600 text-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold">99.9%</div>
+                                <div class="text-sm">Uptime</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-purple-500 to-pink-600 text-white p-4 rounded-lg">
+                                <div class="text-2xl font-bold">4.8/5</div>
+                                <div class="text-sm">Rating Pengguna</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="text-white text-center">
-                <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
-            </p>
         </div>
 
-        <div class="search-container">
-            <form id="searchForm" class="flex gap-4">
-                <input 
-                    type="text" 
-                    class="search-input"
-                    placeholder="Masukkan kata kunci pencarian..."
-                    required
-                >
-                <button type="submit" class="search-button whitespace-nowrap">Cari</button>
-            </form>
-        </div>
-    </main>
+        <!-- Contact Section -->
+        <div id="contactSection" class="hidden bg-white/95 backdrop-blur-sm">
+            <div class="max-w-4xl mx-auto p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">Hubungi Kami</h2>
+                    <button id="closeContact" class="text-blue-600 hover:text-blue-800 font-medium text-xl">
+                        ✕ Tutup
+                    </button>
+                </div>
 
-    <script>
-        document.getElementById('searchForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const searchTerm = document.querySelector('.search-input').value;
-            const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`;
-            window.open(searchUrl, '_blank');
-        });
-    </script>
-</body>
-</html>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600">📞 Informasi Kontak</h3>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">📧</span>
+                                <div>
+                                    <div class="font-medium">Email</div>
+                                    <a href="mailto:info@carisaja.com" class="text-blue-600 hover:underline">info@carisaja.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">💬</span>
+                                <div>
+                                    <div class="font-medium">WhatsApp</div>
+                                    <a href="https://wa.me/855762480281" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">+855 76-248-0281</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">🌐</span>
+                                <div>
+                                    <div class="font-medium">Website</div>
+                                    <span class="text-gray-600">www.carisaja.com</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600">🕒 Jam Operasional</h3>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Senin - Jumat</span>
+                                    <span class="font-medium">09:00 - 18:00 WIB</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Sabtu</span>
+                                    <span class="font-medium">09:00 - 15:00 WIB</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Minggu</span>
+                                    <span class="font-medium">Tutup</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+ (file truncated for brevity)

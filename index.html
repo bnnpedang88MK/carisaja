@@ -342,12 +342,8 @@
             document.getElementById('aboutSection').classList.add('hidden');
         });
 
-        const btn = document.querySelector('#myButton');
-if (btn) {
-  btn.addEventListener('click', handleClick);
-} else {
-  console.warn('Element #myButton tidak ditemukan saat inisialisasi listener.');
-}
+        document.getElementById('closeContact').addEventListener('click', function() {
+            document.getElementById('contactSection').classList.add('hidden');
         });
 
         // Contact form functionality

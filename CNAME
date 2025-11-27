@@ -1,1 +1,35 @@
-www.temukanaja.com
+# ====================================
+# PENGATURAN DASAR SITUS (WAJIB DIUBAH)
+# ====================================
+
+# 1. Judul Situs Anda
+title: Situs Saya yang Keren
+# 2. Deskripsi singkat tentang situs Anda
+description: Ini adalah blog atau halaman web yang dibangun dengan Jekyll dan di-hosting di GitHub Pages.
+# 3. URL Domain utama Anda (menggunakan CNAME: www.temukanaja.com)
+url: "https://www.temukanaja.com" # Sudah disesuaikan dengan domain kustom Anda.
+baseurl: "" # Jika situs Anda diakses di root domain, biarkan kosong.
+
+# ====================================
+# PENGATURAN BUILD JEKYLL
+# ====================================
+
+# Tema: Gunakan tema yang kompatibel dengan GitHub Pages (seperti minima atau jekyll-theme-primer)
+# Jika Anda menggunakan tema kustom atau mengedit file scss/css, Anda mungkin tidak perlu baris ini.
+# theme: minima
+
+# File yang akan diabaikan oleh Jekyll saat proses build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/
+
+# ====================================
+# PLUGINS (PASTIKAN SEMUA SUDAH TERINSTAL DI LINGKUNGAN GITHUB PAGES)
+# ====================================
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap

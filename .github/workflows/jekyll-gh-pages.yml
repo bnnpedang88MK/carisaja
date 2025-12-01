@@ -1,14 +1,11 @@
 # =========================================================
-# FILE INI HARUS BERISI STRUKTUR GITHUB ACTIONS (BUKAN JEKYLL)
+# WORKFLOW JEKYLL UNTUK DEPLOYMENT GITHUB PAGES (LEBIH RINGKAS)
 # =========================================================
 name: Deploy Jekyll to GitHub Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
@@ -27,17 +24,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Build with Jekyll
+
+      # LANGKAH INI SUDAH MENGURUS BUILD DAN UPLOAD ARTIFACT.
+      # TIDAK PERLU actions/upload-pages-artifact@v3 terpisah lagi.
+      - name: Build and Upload Jekyll Site
         uses: actions/jekyll-build-pages@v1
         with:
-          # Penting: Menggunakan akar repositori sebagai sumber
-          source: ./
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-
+          source: .
+          destination: _site
+          
   # 2. Deployment job: Menyebarkan artefak ke GitHub Pages
   deploy:
     environment:

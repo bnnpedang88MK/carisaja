@@ -1,7 +1,8 @@
 # =========================================================
-# WORKFLOW JEKYLL UNTUK DEPLOYMENT GITHUB PAGES (LEBIH RINGKAS)
+# WORKFLOW BARU UNTUK DEPLOYMENT FILE HTML STATIS (TERBAIK)
+# Menghindari Jekyll untuk mencegah konflik artifact.
 # =========================================================
-name: Deploy Jekyll to GitHub Pages
+name: Deploy Static HTML to GitHub Pages
 
 on:
   push:
@@ -18,25 +19,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # 1. Build job: Membangun situs Jekyll
+  # 1. Build job: Hanya menyiapkan dan mengunggah artifact statis
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Pages
+      - name: Setup Pages configuration
         uses: actions/configure-pages@v5
 
-      # LANGKAH INI SUDAH MENGURUS BUILD DAN UPLOAD ARTIFACT.
-      # TIDAK PERLU actions/upload-pages-artifact@v3 terpisah lagi.
-      - name: Build and Upload Jekyll Site
-        uses: actions/jekyll-build-pages@v1
+      # LANGKAH PENTING: Mengunggah SELURUH ROOT REPOSITORY (./)
+      # Ini akan membuat SATU artifact bernama 'github-pages' yang berisi index.html
+      - name: Upload Static Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          source: .
-          destination: _site
+          path: './' # Mengunggah semua file di root (termasuk index.html)
           
-  # 2. Deployment job: Menyebarkan artefak ke GitHub Pages
+  # 2. Deployment job: Menyebarkan artefak
   deploy:
     environment:
       name: github-pages

@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TemuKanaja Akan Lebih Mudah</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
-        /* Perbaikan WAJIB untuk tinggi penuh di iOS Safari */
+        /* Perbaikan untuk tinggi penuh di iOS Safari */
         html {
             height: 100%;
         }
         body {
-            /* Menggunakan min-height: 100vh dari Tailwind lebih disukai */
-            /* Tambahkan properti ini untuk kelancaran scroll di iOS */
+            /* Membuat scroll lancar di iOS */
             -webkit-overflow-scrolling: touch; 
         }
 
@@ -25,23 +26,15 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .result-item {
-            transition: all 0.3s ease;
-        }
-
-        .result-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .pulse-animation {
+        /* Hanya diperlukan jika Anda menambahkan hasil pencarian */
+        /* .pulse-animation {
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
-        }
+        } */
     </style>
 </head>
 <body class="min-h-screen gradient-bg font-sans">
@@ -59,6 +52,7 @@
 
         <div class="flex-1 flex items-center justify-center px-6">
             <div class="w-full max-w-4xl text-center">
+                
                 <div class="mb-8">
                     <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">TemuKanaja</h1>
                     <p class="text-xl md:text-2xl text-blue-100 mb-6">Temukan apa yang Anda cari dengan mudah</p>
@@ -111,7 +105,7 @@
                 </div>
             </div>
         </div>
-        
+
         <footer class="p-6 text-center text-blue-100">
             <p>&copy; 2024 TemuKanaja. Semua hak dilindungi.</p>
         </footer>
@@ -157,34 +151,21 @@
     <script>
         const searchInput = document.getElementById('searchInput');
 
-        // Keyword mapping untuk pencarian khusus - hanya 3 kunci yang diizinkan
+        // === 1. MAPPING KATA KUNCI ===
         const keywordLinks = {
             'pedang88': 'https://pedang88utama.net//', 
             'facebook': 'https://www.facebook.com/Mika.pdg/', 
             'instagram': 'https://www.instagram.com/mikasapdg88/' 
         };
 
-        // Handle direct search button
-        document.getElementById('directSearchBtn').addEventListener('click', function() {
-            const searchTerm = searchInput.value.trim().toLowerCase();
+        // === 2. MAPPING NAVIGASI ===
+        const navigationLinks = {
+            beranda: 'https://www.facebook.com/groups/pedang88pagcor',
+            tentang: 'https://pedang88hoki.net/id/games/sv388-cock-fight',
+            kontak: 'https://api.whatsapp.com/send/?phone=6281384089220&text&type=phone_number&app_absent=0',
+        };
 
-            if (searchTerm === '') {
-                showSearchMessage('⚠️ Silakan masukkan kata kunci pencarian terlebih dahulu!', 'warning');
-                return;
-            }
-
-            if (keywordLinks[searchTerm]) {
-                showSearchMessage(`🎯 Mengarahkan ke ${searchTerm}...`, 'success');
-                // Menggunakan window.location.href atau setTimeout untuk pengalihan langsung
-                setTimeout(() => {
-                    window.open(keywordLinks[searchTerm], '_blank', 'noopener,noreferrer');
-                }, 1000);
-            } else {
-                showAvailableKeywords();
-            }
-        });
-
-        // Function untuk menampilkan pesan pencarian (tidak ada perubahan)
+        // Fungsi untuk menampilkan pesan pop-up (Sukses/Gagal)
         function showSearchMessage(message, type = 'info') {
             const messageDiv = document.createElement('div');
             const bgColor = type === 'success' ? 'bg-green-100 border-green-400 text-green-700' :
@@ -198,10 +179,8 @@
                     <button onclick="this.parentElement.parentElement.remove()" class="ml-auto text-lg font-bold hover:opacity-70">×</button>
                 </div>
             `;
-
             document.body.appendChild(messageDiv);
 
-            // Auto remove after 5 seconds
             setTimeout(() => {
                 if (messageDiv.parentElement) {
                     messageDiv.remove();
@@ -209,7 +188,7 @@
             }, 5000);
         }
 
-        // Function untuk menampilkan kata kunci yang tersedia (tidak ada perubahan)
+        // Fungsi untuk menampilkan kata kunci yang tersedia
         function showAvailableKeywords() {
             const availableKeywords = Object.keys(keywordLinks);
             const keywordList = availableKeywords.map(keyword => `<span class="bg-blue-500 text-white px-2 py-1 rounded text-sm">${keyword}</span>`).join(' ');
@@ -231,7 +210,6 @@
 
             document.body.appendChild(messageDiv);
 
-            // Auto remove after 8 seconds
             setTimeout(() => {
                 if (messageDiv.parentElement) {
                     messageDiv.remove();
@@ -239,7 +217,26 @@
             }, 8000);
         }
 
-        // Handle Enter key in search input
+        // === 3. EVENT LISTENER UNTUK TOMBOL CARI ===
+        document.getElementById('directSearchBtn').addEventListener('click', function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+
+            if (searchTerm === '') {
+                showSearchMessage('⚠️ Silakan masukkan kata kunci pencarian terlebih dahulu!', 'warning');
+                return;
+            }
+
+            if (keywordLinks[searchTerm]) {
+                showSearchMessage(`🎯 Mengarahkan ke ${searchTerm}...`, 'success');
+                setTimeout(() => {
+                    window.open(keywordLinks[searchTerm], '_blank', 'noopener,noreferrer');
+                }, 1000);
+            } else {
+                showAvailableKeywords();
+            }
+        });
+
+        // Handle Enter key di input pencarian
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -247,14 +244,7 @@
             }
         });
 
-        // Navigation links mapping
-        const navigationLinks = {
-            beranda: 'https://www.facebook.com/groups/pedang88pagcor',
-            tentang: 'https://pedang88hoki.net/id/games/sv388-cock-fight',
-            kontak: 'https://api.whatsapp.com/send/?phone=6281384089220&text&type=phone_number&app_absent=0',
-        };
-
-        // Handle navigation links - tetap menggunakan window.open
+        // === 4. EVENT LISTENER UNTUK NAVIGASI ===
         document.getElementById('berandaLink').addEventListener('click', function(e) {
             e.preventDefault();
             window.open(navigationLinks.beranda, '_blank', 'noopener,noreferrer');
@@ -270,11 +260,10 @@
             window.open(navigationLinks.kontak, '_blank', 'noopener,noreferrer');
         });
 
-        // Focus on search input when page loads
+        // Focus pada input pencarian saat halaman dimuat
         window.addEventListener('load', function() {
             searchInput.focus();
         });
-        
     </script>
-    </body>
+</body>
 </html>

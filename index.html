@@ -177,11 +177,11 @@
         <!-- Menggunakan bg-safety-notice untuk Hijau Transparan dan Border Emas -->
         <div class="bg-safety-notice rounded-xl shadow-2xl w-full max-w-xl p-6 relative border-2 border-accent-gold">
             <h2 class="text-2xl font-bold text-accent mb-4 text-center">🎉 Hadiah Rahasia Ctrl+U! 🎉</h2>
-            <div class="aspect-video bg-gray-900 rounded-lg overflow-hidden">
-                <!-- Frame video akan dimasukkan di sini -->
-                <iframe id="giftVideoFrame" src="" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+            <!-- PERUBAHAN: Mengganti iframe dengan img untuk menampilkan GIF -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden flex justify-center items-center p-2">
+                <img id="giftImage" src="" alt="Hadiah Rahasia GIF" class="max-w-full h-auto rounded-lg">
             </div>
-            <p class="text-sm text-white/80 mt-4 text-center">Video ini adalah kejutan rahasia. Jangan bagikan link ini secara publik!</p>
+            <p class="text-sm text-white/80 mt-4 text-center">Gambar ini adalah kejutan rahasia. Jangan bagikan link ini secara publik!</p>
             <button onclick="hideGiftModal()" class="mt-4 w-full py-2 btn-main rounded-lg">Tutup Hadiah</button>
         </div>
     </div>
@@ -340,25 +340,25 @@
             }, 8000);
         }
         
-        // Fungsi untuk menampilkan modal hadiah video
-        function showGiftModal(videoUrl) {
+        // Fungsi untuk menampilkan modal hadiah GIF (Diperbarui)
+        function showGiftModal(imageUrl) {
             const modal = document.getElementById('giftModal');
-            const iframe = document.getElementById('giftVideoFrame');
+            const img = document.getElementById('giftImage');
             
-            // Mengatur URL video ke iframe
-            iframe.src = videoUrl;
+            // Mengatur URL gambar ke elemen <img>
+            img.src = imageUrl;
             
             // Menampilkan modal
             modal.classList.remove('hidden');
         }
 
-        // Fungsi untuk menyembunyikan modal hadiah
+        // Fungsi untuk menyembunyikan modal hadiah GIF (Diperbarui)
         function hideGiftModal() {
             const modal = document.getElementById('giftModal');
-            const iframe = document.getElementById('giftVideoFrame');
+            const img = document.getElementById('giftImage');
             
-            // Menghentikan video dengan menghapus src
-            iframe.src = "";
+            // Menghentikan GIF dengan menghapus src (untuk beberapa browser, ini dapat menghentikan animasi)
+            img.src = ""; 
             
             // Menyembunyikan modal
             modal.classList.add('hidden');
@@ -407,13 +407,13 @@
             window.open(navigationLinks.kontak, '_blank', 'noopener,noreferrer');
         });
 
-        // === 7. EVENT LISTENER UNTUK CTRL+U (GIFT VIDEO) ===
+        // === 7. EVENT LISTENER UNTUK CTRL+U (GIFT GIF) ===
         document.addEventListener('keydown', function(e) {
             // Memeriksa kombinasi Ctrl+U (atau Cmd+U di Mac)
             if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
                 e.preventDefault(); // Mencegah browser membuka tampilan kode sumber
-                const videoUrl = 'https://www.facebook.com/reel/493581880282816';
-                showGiftModal(videoUrl);
+                const imageUrl = 'https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif';
+                showGiftModal(imageUrl);
             }
         });
 

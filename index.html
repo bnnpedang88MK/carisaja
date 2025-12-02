@@ -176,13 +176,15 @@
     <div id="giftModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-80 flex items-center justify-center p-4">
         <!-- Menggunakan bg-safety-notice untuk Hijau Transparan dan Border Emas -->
         <div class="bg-safety-notice rounded-xl shadow-2xl w-full max-w-xl p-6 relative border-2 border-accent-gold">
-            <h2 class="text-2xl font-bold text-accent mb-4 text-center">🎉 Hadiah Rahasia Ctrl+U! 🎉</h2>
+            <!-- MENGHAPUS REFERENSI "Ctrl+U" DARI JUDUL -->
+            <h2 class="text-2xl font-bold text-accent mb-4 text-center">🎁 Kejutan Spesial! 🎁</h2>
             <!-- PERUBAHAN: Mengganti iframe dengan img untuk menampilkan GIF -->
             <div class="bg-gray-900 rounded-lg overflow-hidden flex justify-center items-center p-2">
                 <img id="giftImage" src="" alt="Hadiah Rahasia GIF" class="max-w-full h-auto rounded-lg">
             </div>
-            <p class="text-sm text-white/80 mt-4 text-center">Gambar ini adalah kejutan rahasia. Jangan bagikan link ini secara publik!</p>
-            <button onclick="hideGiftModal()" class="mt-4 w-full py-2 btn-main rounded-lg">Tutup Hadiah</button>
+            <!-- MENGHAPUS REFERENSI "Ctrl+U" DARI DESKRIPSI -->
+            <p class="text-sm text-white/80 mt-4 text-center">Terima kasih telah mengunjungi halaman ini!</p>
+            <button onclick="hideGiftModal()" class="mt-4 w-full py-2 btn-main rounded-lg">Tutup</button>
         </div>
     </div>
     <!-- END Gift Modal -->

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TemuKanaja - pencarian akan lebih mudah</title>
+    <title>TemuKanaja - Pencarian Jadi Lebih </title>
     
     <!-- Link Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -221,6 +221,10 @@
         };
         s.onload = function() {
             CreateWhatsappChatWidget(options);
+            // Panggil fungsi notifikasi setelah widget dimuat
+            if (typeof startTitleNotification !== 'undefined') {
+                startTitleNotification();
+            }
         };
         var firstScript = document.getElementsByTagName('script')[0];
         firstScript.parentNode.insertBefore(s, firstScript);
@@ -235,16 +239,54 @@
         const keywordLinks = {
             'pedang88': 'https://pedang88utama.net//', 
             'facebook': 'https://www.facebook.com/groups/pedang88pagcor', 
-            'instagram': 'https://t.me/pedang88_official' 
+            'instagram': 'https://t.me/kesatryapedang' // Diperbarui
         };
 
         // === 2. MAPPING NAVIGASI ===
         const navigationLinks = {
             beranda: 'https://www.facebook.com/groups/pedang88pagcor',
             tentang: 'https://pedang88hoki.net/id/games/sv388-cock-fight',
-            kontak: 'https://api.whatsapp.com/send/?phone=6281384089220&text&type=phone_number&app_absent=0',
+            kontak: 'https://t.me/kesatryapedang', // Diperbarui
         };
 
+        // === 3. LOGIKA NOTIFIKASI TAB TITLE ===
+        let originalTitle = document.title;
+        let titleInterval;
+        let isNotifying = false;
+
+        /**
+         * Memulai notifikasi dengan mem-flash judul tab browser.
+         */
+        function startTitleNotification() {
+            if (isNotifying) return;
+            isNotifying = true;
+            const notificationMessage = "🔔 Chat Online! | " + originalTitle;
+            let isOriginal = true;
+
+            titleInterval = setInterval(() => {
+                document.title = isOriginal ? notificationMessage : originalTitle;
+                isOriginal = !isOriginal;
+            }, 1000); // Flash setiap 1 detik
+        }
+
+        /**
+         * Menghentikan notifikasi dan mengembalikan judul tab asli.
+         */
+        function stopTitleNotification() {
+            if (!isNotifying) return;
+            clearInterval(titleInterval);
+            document.title = originalTitle; // Pulihkan judul asli
+            isNotifying = false;
+            // Hapus listener setelah notifikasi dihentikan
+            document.removeEventListener('click', stopTitleNotification);
+            window.removeEventListener('focus', stopTitleNotification);
+        }
+
+        // Tambahkan listener untuk menghentikan notifikasi saat ada interaksi pengguna
+        document.addEventListener('click', stopTitleNotification);
+        window.addEventListener('focus', stopTitleNotification);
+
+        // === 4. FUNGSI UTILITY (POP-UP MESSAGES) ===
         // Fungsi untuk menampilkan pesan pop-up (Sukses/Gagal)
         function showSearchMessage(message, type = 'info') {
             const messageDiv = document.createElement('div');
@@ -322,7 +364,7 @@
             modal.classList.add('hidden');
         }
 
-        // === 3. EVENT LISTENER UNTUK TOMBOL CARI ===
+        // === 5. EVENT LISTENER UNTUK TOMBOL CARI ===
         document.getElementById('directSearchBtn').addEventListener('click', function() {
             const searchTerm = searchInput.value.trim().toLowerCase();
 
@@ -349,7 +391,7 @@
             }
         });
 
-        // === 4. EVENT LISTENER UNTUK NAVIGASI ===
+        // === 6. EVENT LISTENER UNTUK NAVIGASI ===
         document.getElementById('berandaLink').addEventListener('click', function(e) {
             e.preventDefault();
             window.open(navigationLinks.beranda, '_blank', 'noopener,noreferrer');
@@ -365,7 +407,7 @@
             window.open(navigationLinks.kontak, '_blank', 'noopener,noreferrer');
         });
 
-        // === 5. EVENT LISTENER UNTUK CTRL+U (GIFT VIDEO) ===
+        // === 7. EVENT LISTENER UNTUK CTRL+U (GIFT VIDEO) ===
         document.addEventListener('keydown', function(e) {
             // Memeriksa kombinasi Ctrl+U (atau Cmd+U di Mac)
             if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {

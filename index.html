@@ -349,6 +349,16 @@ const navigationLinks = {
 function showGiftModal(imageUrl) {
   const modal = document.getElementById('giftModal');
   const img = document.getElementById('giftImage');
+    
+  img.src = imageUrl;
+  modal.classList.remove('hidden');
+}
+
+// Fungsi untuk menampilkan modal hadiah GIF
+function showGiftModal(imageUrl) {
+  const modal = document.getElementById('giftModal');
+  const img = document.getElementById('giftImage');
+
   img.src = imageUrl;
   modal.classList.remove('hidden');
 }
@@ -357,17 +367,10 @@ function showGiftModal(imageUrl) {
 function hideGiftModal() {
   const modal = document.getElementById('giftModal');
   const img = document.getElementById('giftImage');
+
   img.src = "";
   modal.classList.add('hidden');
 }
-
-            // Menghentikan GIF dengan menghapus src (untuk beberapa browser, ini dapat menghentikan animasi)
-            img.src = ""; 
-            
-            // Menyembunyikan modal
-            modal.classList.add('hidden');
-        }
-
         // === 5. EVENT LISTENER UNTUK TOMBOL CARI ===
         document.getElementById('directSearchBtn').addEventListener('click', function() {
             const searchTerm = searchInput.value.trim().toLowerCase();

@@ -140,31 +140,28 @@
                 </div>
 
                 <!-- Search Box -->
-                <div class="search-container rounded-2xl p-8 mb-8 border border-white/20">
-                    <form id="searchForm" class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1">
-                            <label for="searchInput" class="sr-only">Kata kunci pencarian</label>
-                            <!-- Menggunakan input-focus-ring untuk cincin fokus Emas -->
-                            <input
-                                 type="text"
-                                 id="searchInput"
-                                 placeholder="Masukkan kata kunci pencarian..."
-                                 class="w-full px-6 py-4 text-lg rounded-xl border-0 input-focus-ring focus:outline-none text-gray-900"
-                                 required
-                            >
-                        </div>
-                        <!-- Tombol Emas Utama (btn-main) -->
-                        <button
-                             type="button"
-                            id="directSearchBtn"
-                            class="px-8 py-4 font-semibold rounded-xl transition-colors focus:outline-none btn-main"
-                        >
-                            🔍 Cari
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="search-container rounded-2xl p-8 mb-8 border border-white/20">
+  <form id="searchForm" class="flex flex-col md:flex-row gap-4">
+    <div class="flex-1">
+      <label for="searchInput" class="sr-only">Kata kunci pencarian</label>
+      <input
+        type="text"
+        id="searchInput"
+        name="search"
+        placeholder="Masukkan kata kunci pencarian..."
+        class="w-full px-6 py-4 text-lg rounded-xl border-0 input-focus-ring focus:outline-none text-gray-900"
+        required
+      />
+    </div>
+    <button
+      type="button"
+      id="directSearchBtn"
+      class="px-8 py-4 font-semibold rounded-xl transition-colors focus:outline-none btn-main"
+    >
+      🔍 Cari
+    </button>
+  </form>
+</div>
 
         <!-- Footer -->
         <footer class="p-6 text-center text-white/70">

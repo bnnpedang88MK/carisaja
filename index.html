@@ -245,11 +245,14 @@
         };
 
         // === 2. MAPPING NAVIGASI ===
-        const navigationLinks = {
-            beranda: 'https://www.facebook.com/groups/pedang88pagcor',
-            tentang: 'https://pedang88slotgacormk.pages.dev/',
-            kontak: 'https://api.whatsapp.com/send?phone=855762480281&text=Halo%20admin%2C%20mau%20tanya%20info%20bonus%20ya', // Diperbarui
-        };
+const waPhone = "855762480281";
+const waText  = encodeURIComponent("Halo admin, mau tanya info bonus ya");
+
+const navigationLinks = {
+  beranda: "https://www.facebook.com/groups/pedang88pagcor",
+  tentang: "https://pedang88slotgacormk.pages.dev/",
+  kontak: `https://wa.me/${waPhone}?text=${waText}`,
+};
 
         // === 3. LOGIKA NOTIFIKASI TAB TITLE ===
         let originalTitle = document.title;
@@ -342,23 +345,22 @@
             }, 8000);
         }
         
-        // Fungsi untuk menampilkan modal hadiah GIF (Diperbarui)
-        function showGiftModal(imageUrl) {
-            const modal = document.getElementById('giftModal');
-            const img = document.getElementById('giftImage');
-            
-            // Mengatur URL gambar ke elemen <img>
-            img.src = imageUrl;
-            
-            // Menampilkan modal
-            modal.classList.remove('hidden');
-        }
+       // Fungsi untuk menampilkan modal hadiah GIF
+function showGiftModal(imageUrl) {
+  const modal = document.getElementById('giftModal');
+  const img = document.getElementById('giftImage');
+  img.src = imageUrl;
+  modal.classList.remove('hidden');
+}
 
-        // Fungsi untuk menyembunyikan modal hadiah GIF (Diperbarui)
-        function hideGiftModal() {
-            const modal = document.getElementById('giftModal');
-            const img = document.getElementById('giftImage');
-            
+// Fungsi untuk menyembunyikan modal hadiah GIF
+function hideGiftModal() {
+  const modal = document.getElementById('giftModal');
+  const img = document.getElementById('giftImage');
+  img.src = "";
+  modal.classList.add('hidden');
+}
+
             // Menghentikan GIF dengan menghapus src (untuk beberapa browser, ini dapat menghentikan animasi)
             img.src = ""; 
             
@@ -406,7 +408,7 @@
 
         document.getElementById('kontakLink').addEventListener('click', function(e) {
             e.preventDefault();
-            window.open(navigationLinks.kontak, '_blank', 'noopener,noreferrer');
+           window.open(navigationLinks.kontak, "_blank", "noopener,noreferrer");
         });
 
         // === 7. EVENT LISTENER UNTUK CTRL+U (GIFT GIF) ===

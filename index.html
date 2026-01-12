@@ -141,28 +141,21 @@
 
                 <!-- Search Box -->
 <div class="search-container rounded-2xl p-8 mb-8 border border-white/20">
-  <form id="searchForm" class="flex flex-col md:flex-row gap-4">
-    <div class="flex-1">
-      <label for="searchInput" class="sr-only">Kata kunci pencarian</label>
-      <input
-        type="text"
-        id="searchInput"
-        name="search"
-        placeholder="Masukkan kata kunci pencarian..."
-        class="w-full px-6 py-4 text-lg rounded-xl border-0 input-focus-ring focus:outline-none text-gray-900"
-        required
-      />
-    </div>
-    <button
-      type="button"
-      id="directSearchBtn"
-      class="px-8 py-4 font-semibold rounded-xl transition-colors focus:outline-none btn-main"
-    >
-      🔍 Cari
-    </button>
-  </form>
-</div>
-
+  <form id="searchForm" autocomplete="off" class="flex flex-col md:flex-row gap-4">
+  ...
+  <input
+    type="text"
+    id="searchInput"
+    name="search"
+    autocomplete="off"
+    autocapitalize="off"
+    autocorrect="off"
+    spellcheck="false"
+    placeholder="Masukkan kata kunci pencarian..."
+    class="w-full px-6 py-4 text-lg rounded-xl border-0 input-focus-ring focus:outline-none text-gray-900"
+    required
+  />
+</form>
         <!-- Footer -->
         <footer class="p-6 text-center text-white/70">
             <p>&copy; 2024 TemuKanaja. Semua hak dilindungi.</p>
@@ -233,25 +226,27 @@
     <!-- JavaScript Aplikasi Utama -->
     <script>
         const searchInput = document.getElementById('searchInput');
+// === 2. MAPPING NAVIGASI (WA API) ===
 
-     // === 1. MAPPING KATA KUNCI ===
-const keywordLinks = {
-  'pedang88': 'https://pedang88god.xyz/', 
-  'facebook': 'https://www.facebook.com/groups/pedang88pagcor', 
-  'instagram': 'https://t.me/kesatryapedang'
-};
+// Beranda
+const waBerandaPhone = "85589438809";
+const waBerandaText  = encodeURIComponent("Halo admin, saya ingin bertanya lebih lanjut");
 
-// === 2. MAPPING NAVIGASI ===
-const waPhone = "855762480281";
-const waText  = encodeURIComponent("Halo admin, mau tanya info bonus");
+// Tentang
+const waTentangPhone = "855762096679";
+const waTentangText  = encodeURIComponent("Halo admin, saya ingin menanyakan informasi");
+
+// Kontak (tetap)
+const waKontakPhone = "855762480281";
+const waKontakText  = encodeURIComponent("Halo admin, mau tanya info bonus");
 
 const navigationLinks = {
-  beranda: "https://www.facebook.com/groups/pedang88pagcor",
-  tentang: "https://pedang88slotgacormk.pages.dev/",
-  kontak: `https://wa.me/${waPhone}?text=${waText}`,
+  beranda: `https://api.whatsapp.com/send?phone=${waBerandaPhone}&text=${waBerandaText}`,
+  tentang: `https://api.whatsapp.com/send?phone=${waTentangPhone}&text=${waTentangText}`,
+  kontak:  `https://wa.me/${waKontakPhone}?text=${waKontakText}`
 };
 
-        // === 3. LOGIKA NOTIFIKASI TAB TITLE ===
+       // === 3. LOGIKA NOTIFIKASI TAB TITLE ===
         let originalTitle = document.title;
         let titleInterval;
         let isNotifying = false;
@@ -359,32 +354,56 @@ function hideGiftModal() {
   img.src = "";
   modal.classList.add('hidden');
 }
-        // === 5. EVENT LISTENER UNTUK TOMBOL CARI ===
-        document.getElementById('directSearchBtn').addEventListener('click', function() {
-            const searchTerm = searchInput.value.trim().toLowerCase();
+// === 5. EVENT LISTENER UNTUK TOMBOL CARI (FINAL) ===
+function handleSearchRedirect() {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  if (searchTerm === '') return;
 
-            if (searchTerm === '') {
-                showSearchMessage('⚠️ Silakan masukkan kata kunci pencarian terlebih dahulu!', 'warning');
-                return;
-            }
+  // RULE: awalan "tu" -> tuna
+  if (searchTerm.startsWith('tu')) {
+    window.open('https://tuna55goods.xyz', '_blank', 'noopener,noreferrer');
+    return;
+  }
 
-            if (keywordLinks[searchTerm]) {
-                showSearchMessage(`🎯 Mengarahkan ke ${searchTerm}...`, 'success');
-                setTimeout(() => {
-                    window.open(keywordLinks[searchTerm], '_blank', 'noopener,noreferrer');
-                }, 1000);
-            } else {
-                showAvailableKeywords();
-            }
-        });
+  // RULE: awalan "pe" -> pedang
+  if (searchTerm.startsWith('pe')) {
+    window.open('https://www.pedang88god.xyz/', '_blank', 'noopener,noreferrer');
+    return;
+  }
 
-        // Handle Enter key di input pencarian
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('directSearchBtn').click();
-            }
-        });
+  // selain itu: diam saja
+}
+
+document.getElementById('directSearchBtn').addEventListener('click', handleSearchRedirect);
+
+// Enter = jalankan pencarian juga
+searchInput.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    handleSearchRedirect();
+  }
+});
+
+  // === RULE B: APA PUN YANG DIAWALI "pe" ===
+  // contoh: pedang, pedang88, pedang8, perang, dll
+  if (searchTerm.startsWith('pe')) {
+    showSearchMessage('🎯 Mengarahkan ke pedang88...', 'success');
+    setTimeout(() => {
+      window.open('https://www.pedang88god.xyz/', '_blank', 'noopener,noreferrer');
+    }, 800);
+    return;
+  }
+
+  // === KEYWORD NORMAL (EXACT) ===
+  if (keywordLinks[searchTerm]) {
+    showSearchMessage(`🎯 Mengarahkan ke ${searchTerm}...`, 'success');
+    setTimeout(() => {
+      window.open(keywordLinks[searchTerm], '_blank', 'noopener,noreferrer');
+    }, 800);
+  } else {
+    showAvailableKeywords();
+  }
+});
 
         // === 6. EVENT LISTENER UNTUK NAVIGASI ===
         document.getElementById('berandaLink').addEventListener('click', function(e) {

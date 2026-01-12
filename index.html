@@ -57,19 +57,19 @@
           <p class="text-xl md:text-2xl text-white/90 mt-4 mb-6">Temukan apa yang Anda cari dengan mudah</p>
 
           <!-- Instructions -->
-          <div class="search-container rounded-xl p-6 mb-6 text-left max-w-2xl mx-auto border border-white/20">
-            <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
-            <ol class="text-white/80 space-y-2">
-              <li class="flex items-start">
-                <span class="bg-accent-circle rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
-                <span>Ketik awalan <span class="font-semibold text-accent">tu</span> atau <span class="font-semibold text-accent">pe</span></span>
-              </li>
-              <li class="flex items-start">
-                <span class="bg-accent-circle rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
-                <span>Tekan <span class="font-semibold text-accent">Enter</span> atau klik tombol <span class="font-semibold text-accent">Cari</span></span>
-              </li>
-            </ol>
-          </div>
+       <div class="search-container rounded-xl p-6 mb-6 text-left max-w-2xl mx-auto border border-white/20">
+  <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
+  <ol class="text-white/80 space-y-2">
+    <li class="flex items-start">
+      <span class="bg-accent-circle rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
+      <span>Cari nama situs di <span class="font-semibold text-accent">kolom pencarian</span></span>
+    </li>
+    <li class="flex items-start">
+      <span class="bg-accent-circle rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
+      <span>Klik tombol <span class="font-semibold text-accent">"Cari"</span></span>
+    </li>
+  </ol>
+</div>
 
           <!-- Safety Notice -->
           <div class="rounded-xl p-4 mb-6 bg-safety-notice">
@@ -88,18 +88,19 @@
           <form id="searchForm" autocomplete="off" class="flex flex-col md:flex-row gap-4">
             <div class="flex-1">
               <label for="searchInput" class="sr-only">Kata kunci pencarian</label>
-              <input
-                type="text"
-                id="searchInput"
-                name="q_temukanaja"
-                autocomplete="off"
-                autocapitalize="off"
-                autocorrect="off"
-                spellcheck="false"
-                placeholder="Ketik awalan: tu (tuna) / pe (pedang)"
-                class="w-full px-6 py-4 text-lg rounded-xl border-0 input-focus-ring focus:outline-none text-gray-900"
-                required
-              />
+           <input
+  type="text"
+  id="searchInput"
+  name="search"
+  placeholder="Enter Keyword..."
+  autocomplete="off"
+  autocapitalize="off"
+  autocorrect="off"
+  spellcheck="false"
+  class="w-full px-6 py-4 text-lg rounded-xl border-0 input-focus-ring focus:outline-none text-gray-900"
+  required
+/>
+
             </div>
             <button
               type="submit"

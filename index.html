@@ -1,440 +1,286 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temukanaja - Pencarian Jadi Lebih Mudah</title>
-    
-    <!-- Link Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Gaya Kustom (CSS) dengan Tema Hijau Tua/Hutan dan Aksen Emas -->
-    <style>
-        /* 1. Variabel Warna Baru (Hijau Tua, Emas) */
-        :root {
-            --bg-dark: #0c3b22; /* Hijau Tua Gelap */
-            --main-green: #155c36; /* Hijau Utama */
-            --accent-gold: #FFC300; /* Emas untuk teks dan tombol */
-            --text-light: #ffffff;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temukanaja - Pencarian Jadi Lebih Mudah</title>
 
-        /* 2. Gaya Dasar */
-        body {
-            background-color: var(--bg-dark); /* Background Hijau Tua Solid */
-            color: var(--text-light);
-            -webkit-overflow-scrolling: touch; 
-        }
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        /* 3. Gaya Elemen Kustom */
-        /* Gradien Latar Belakang Baru (Hijau Terang ke Hijau Gelap) */
-        .gradient-bg {
-            background: linear-gradient(180deg, var(--main-green) 0%, var(--bg-dark) 100%);
-        }
-
-        /* Latar belakang transparan dengan blur (transparan dari warna Hijau Utama) */
-        .search-container {
-            backdrop-filter: blur(10px);
-            background: rgba(21, 92, 54, 0.4); /* rgba dari #155c36 */
-        }
-
-        /* Warna Tombol Utama (Emas) */
-        .btn-main {
-            background-color: var(--accent-gold); 
-            color: var(--bg-dark); /* Teks Hitam/Gelap di Tombol Emas */
-            transition: background-color 0.3s;
-            font-weight: 700;
-        }
-        .btn-main:hover {
-            background-color: #e6b300; /* Emas sedikit gelap saat hover */
-        }
-
-        /* Utilitas Kustom */
-        .text-accent {
-            color: var(--accent-gold); /* Teks Emas */
-        }
-        .bg-accent-circle {
-            background-color: var(--accent-gold); /* Lingkaran Emas */
-            color: var(--bg-dark); /* Teks Hitam di Lingkaran */
-        }
-        /* Style untuk Safety Notice (Background Hijau Utama Transparan, Border Emas) */
-        .bg-safety-notice {
-            background: rgba(21, 92, 54, 0.6); 
-            border: 1px solid #FFC30050; 
-        }
-
-        /* Kustomisasi Fokus Input (Mengganti ring Emas) */
-        .input-focus-ring:focus {
-            box-shadow: 0 0 0 4px #FFC300;
-        }
-
-        /* Gaya untuk Ikon Pencarian */
-        .search-icon-sm {
-            filter: drop-shadow(0 0 4px #FFC300); /* Memberi sedikit cahaya Emas */
-        }
-        /* Style untuk Modal Hadiah */
-        .border-accent-gold {
-            border-color: var(--accent-gold);
-        }
-    </style>
+  <style>
+    :root{
+      --bg-dark:#0c3b22;
+      --main-green:#155c36;
+      --accent-gold:#FFC300;
+      --text-light:#ffffff;
+    }
+    body{
+      background-color:var(--bg-dark);
+      color:var(--text-light);
+      -webkit-overflow-scrolling:touch;
+    }
+    .gradient-bg{background:linear-gradient(180deg,var(--main-green) 0%,var(--bg-dark) 100%);}
+    .search-container{backdrop-filter:blur(10px);background:rgba(21,92,54,.4);}
+    .btn-main{background-color:var(--accent-gold);color:var(--bg-dark);transition:background-color .3s;font-weight:700;}
+    .btn-main:hover{background-color:#e6b300;}
+    .text-accent{color:var(--accent-gold);}
+    .bg-accent-circle{background-color:var(--accent-gold);color:var(--bg-dark);}
+    .bg-safety-notice{background:rgba(21,92,54,.6);border:1px solid #FFC30050;}
+    .input-focus-ring:focus{box-shadow:0 0 0 4px #FFC300;}
+    .border-accent-gold{border-color:var(--accent-gold);}
+  </style>
 </head>
 
 <body class="min-h-screen font-sans gradient-bg text-white">
-    <main class="min-h-screen flex flex-col">
-        <!-- Header -->
-        <header class="p-6">
-            <nav class="flex justify-between items-center max-w-6xl mx-auto">
-                <!-- Logo/Ikon Kecil di Header (DIHAPUS) -->
-                <div class="flex items-center space-x-2">
-                    <!-- <div class="text-white text-2xl font-bold">TemuKanaja</div> -->
-                </div>
-                
-                <!-- Navigasi Dipindah ke Kiri (untuk mengisi ruang yang kosong, atau tetap di kanan) -->
-                <div class="flex space-x-6"> 
-                    <a href="#" id="berandaLink" class="text-white hover:text-accent transition-colors">Beranda</a>
-                    <a href="#" id="tentangLink" class="text-white hover:text-accent transition-colors">Tentang</a>
-                    <a href="#" id="kontakLink" class="text-white hover:text-accent transition-colors">Kontak</a>
-                </div>
-            </nav>
-        </header>
-
-        <!-- Main Content -->
-        <div class="flex-1 flex items-center justify-center px-6">
-            <div class="w-full max-w-4xl text-center">
-                
-                <!-- Logo/Title Besar -->
-                <div class="mb-8">
-                    <div class="flex items-center justify-center space-x-4">
-                        <h1 class="text-5xl md:text-7xl font-bold text-white">TemuKanaja</h1>
-                    </div>
-                    <p class="text-xl md:text-2xl text-white/90 mt-4 mb-6">Temukan apa yang Anda cari dengan mudah</p>
-
-                    <!-- Instructions -->
-                    <div class="search-container rounded-xl p-6 mb-6 text-left max-w-2xl mx-auto border border-white/20">
-                        <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
-                        <ol class="text-white/80 space-y-2">
-                            <li class="flex items-start">
-                                <!-- Lingkaran Emas dengan Teks Hitam (bg-accent-circle) -->
-                                <span class="bg-accent-circle rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
-                                <span>Cari nama situs disini, Contoh: <span class="font-semibold text-accent">Nama situs</span></span>
-                            </li>
-                            <li class="flex items-start">
-                                <!-- Lingkaran Emas dengan Teks Hitam (bg-accent-circle) -->
-                                <span class="bg-accent-circle rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
-                                <span>Klik Tombol <span class="font-semibold text-accent">"Cari"</span></span>
-                            </li>
-                        </ol>
-                    </div>
-
-                    <!-- Safety Notice -->
-                    <!-- Menggunakan bg-safety-notice untuk Hijau Transparan dan Border Emas -->
-                    <div class="rounded-xl p-4 mb-6 bg-safety-notice">
-                        <div class="flex items-center justify-center mb-2">
-                            <!-- Aksen Emas untuk ikon (text-accent) -->
-                            <span class="text-2xl text-accent mr-2">🛡️</span>
-                            <h4 class="text-lg font-semibold text-white">Link ini aman dari pencarian nawala</h4>
-                        </div>
-                        <p class="text-white/90 text-center">
-                            <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Search Box -->
-<div class="search-container rounded-2xl p-8 mb-8 border border-white/20">
-  <form id="searchForm" autocomplete="off" class="flex flex-col md:flex-row gap-4">
-  ...
-  <input
-    type="text"
-    id="searchInput"
-    name="search"
-    autocomplete="off"
-    autocapitalize="off"
-    autocorrect="off"
-    spellcheck="false"
-    placeholder="Masukkan kata kunci pencarian..."
-    class="w-full px-6 py-4 text-lg rounded-xl border-0 input-focus-ring focus:outline-none text-gray-900"
-    required
-  />
-</form>
-        <!-- Footer -->
-        <footer class="p-6 text-center text-white/70">
-            <p>&copy; 2024 TemuKanaja. Semua hak dilindungi.</p>
-        </footer>
-    </main>
-
-    <!-- Gift Modal Overlay (Untuk Ctrl+U) -->
-    <div id="giftModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-80 flex items-center justify-center p-4">
-        <!-- Menggunakan bg-safety-notice untuk Hijau Transparan dan Border Emas -->
-        <div class="bg-safety-notice rounded-xl shadow-2xl w-full max-w-xl p-6 relative border-2 border-accent-gold">
-            <!-- MENGHAPUS REFERENSI "Ctrl+U" DARI JUDUL -->
-            <h2 class="text-2xl font-bold text-accent mb-4 text-center">🎁 Kejutan Spesial! 🎁</h2>
-            <!-- PERUBAHAN: Mengganti iframe dengan img untuk menampilkan GIF -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden flex justify-center items-center p-2">
-                <img id="giftImage" src="" alt="Hadiah Rahasia GIF" class="max-w-full h-auto rounded-lg">
-            </div>
-            <!-- MENGHAPUS REFERENSI "Ctrl+U" DARI DESKRIPSI -->
-            <p class="text-sm text-white/80 mt-4 text-center">Terima kasih telah mengunjungi halaman ini!</p>
-            <button onclick="hideGiftModal()" class="mt-4 w-full py-2 btn-main rounded-lg">Tutup</button>
+  <main class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="p-6">
+      <nav class="flex justify-between items-center max-w-6xl mx-auto">
+        <div></div>
+        <div class="flex space-x-6">
+          <a href="#" id="berandaLink" class="text-white hover:text-accent transition-colors">Beranda</a>
+          <a href="#" id="tentangLink" class="text-white hover:text-accent transition-colors">Tentang</a>
+          <a href="#" id="kontakLink" class="text-white hover:text-accent transition-colors">Kontak</a>
         </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex items-center justify-center px-6">
+      <div class="w-full max-w-4xl text-center">
+
+        <div class="mb-8">
+          <div class="flex items-center justify-center space-x-4">
+            <h1 class="text-5xl md:text-7xl font-bold text-white">TemuKanaja</h1>
+          </div>
+          <p class="text-xl md:text-2xl text-white/90 mt-4 mb-6">Temukan apa yang Anda cari dengan mudah</p>
+
+          <!-- Instructions -->
+          <div class="search-container rounded-xl p-6 mb-6 text-left max-w-2xl mx-auto border border-white/20">
+            <h3 class="text-lg font-semibold text-white mb-3">📋 Cara Menggunakan:</h3>
+            <ol class="text-white/80 space-y-2">
+              <li class="flex items-start">
+                <span class="bg-accent-circle rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
+                <span>Ketik awalan <span class="font-semibold text-accent">tu</span> atau <span class="font-semibold text-accent">pe</span></span>
+              </li>
+              <li class="flex items-start">
+                <span class="bg-accent-circle rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
+                <span>Tekan <span class="font-semibold text-accent">Enter</span> atau klik tombol <span class="font-semibold text-accent">Cari</span></span>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Safety Notice -->
+          <div class="rounded-xl p-4 mb-6 bg-safety-notice">
+            <div class="flex items-center justify-center mb-2">
+              <span class="text-2xl text-accent mr-2">🛡️</span>
+              <h4 class="text-lg font-semibold text-white">Link ini aman dari pencarian nawala</h4>
+            </div>
+            <p class="text-white/90 text-center">
+              <span class="font-semibold">SIMPAN LINK INI</span> bebas dan aman dari ERROR/NAWALA.
+            </p>
+          </div>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-container rounded-2xl p-8 mb-8 border border-white/20">
+          <form id="searchForm" autocomplete="off" class="flex flex-col md:flex-row gap-4">
+            <div class="flex-1">
+              <label for="searchInput" class="sr-only">Kata kunci pencarian</label>
+              <input
+                type="text"
+                id="searchInput"
+                name="q_temukanaja"
+                autocomplete="off"
+                autocapitalize="off"
+                autocorrect="off"
+                spellcheck="false"
+                placeholder="Ketik awalan: tu (tuna) / pe (pedang)"
+                class="w-full px-6 py-4 text-lg rounded-xl border-0 input-focus-ring focus:outline-none text-gray-900"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              id="directSearchBtn"
+              class="px-8 py-4 font-semibold rounded-xl transition-colors focus:outline-none btn-main"
+            >
+              🔍 Cari
+            </button>
+          </form>
+        </div>
+
+        <footer class="p-6 text-center text-white/70">
+          <p>&copy; 2024 TemuKanaja. Semua hak dilindungi.</p>
+        </footer>
+      </div>
     </div>
-    <!-- END Gift Modal -->
+  </main>
 
-    <!-- WIDGET CHAT WHATSAPP WATI -->
-    <script type="text/javascript">
-        var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?38302';
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = url;
-        var options = {
-            "enabled":true,
-            "chatButtonSetting":{
-                "backgroundColor":"#00e785", 
-                "ctaText":"Chat Mika",
-                "borderRadius":"25",
-                "marginLeft": "0",
-                "marginRight": "20",
-                "marginBottom": "20",
-                "ctaIconWATI":false,
-                "position":"right"
-            },
-            "brandSetting":{
-                "brandName":"Mika Agen Suport",
-                "brandSubTitle":"Online 24/7",
-                "brandImg":"https://i.ibb.co/bM3YMKKN/1.jpg",
-                "welcomeText":"👋 Selamat datang di Mika Agen Support!\n\nKami siap melayani Anda 24/7. \n\nAda yang bisa kami bantu hari ini?",
-                "messageText":"Halo, saya ingin bertanya tentang layanan Pedang88.",
-                "backgroundColor":"#00e785",
-                "ctaText":"Chat Mika",
-                "borderRadius":"25",
-                "autoShow":true,
-                "phoneNumber":"855762480281"
-            }
-        };
-        s.onload = function() {
-            CreateWhatsappChatWidget(options);
-            // Panggil fungsi notifikasi setelah widget dimuat
-            if (typeof startTitleNotification !== 'undefined') {
-                startTitleNotification();
-            }
-        };
-        var firstScript = document.getElementsByTagName('script')[0];
-        firstScript.parentNode.insertBefore(s, firstScript);
-    </script>
-    <!-- END WIDGET CHAT WHATSAPP WATI -->
+  <!-- Gift Modal -->
+  <div id="giftModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-80 flex items-center justify-center p-4">
+    <div class="bg-safety-notice rounded-xl shadow-2xl w-full max-w-xl p-6 relative border-2 border-accent-gold">
+      <h2 class="text-2xl font-bold text-accent mb-4 text-center">🎁 Kejutan Spesial! 🎁</h2>
+      <div class="bg-gray-900 rounded-lg overflow-hidden flex justify-center items-center p-2">
+        <img id="giftImage" src="" alt="Hadiah Rahasia GIF" class="max-w-full h-auto rounded-lg" />
+      </div>
+      <p class="text-sm text-white/80 mt-4 text-center">Terima kasih telah mengunjungi halaman ini!</p>
+      <button id="giftCloseBtn" class="mt-4 w-full py-2 btn-main rounded-lg">Tutup</button>
+    </div>
+  </div>
 
-    <!-- JavaScript Aplikasi Utama -->
-    <script>
-        const searchInput = document.getElementById('searchInput');
-// === 2. MAPPING NAVIGASI (WA API) ===
+  <!-- WATI Widget -->
+  <script type="text/javascript">
+    var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?38302';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = url;
 
-// Beranda
-const waBerandaPhone = "85589438809";
-const waBerandaText  = encodeURIComponent("Halo admin, saya ingin bertanya lebih lanjut");
+    var options = {
+      "enabled": true,
+      "chatButtonSetting": {
+        "backgroundColor": "#00e785",
+        "ctaText": "Chat Mika",
+        "borderRadius": "25",
+        "marginLeft": "0",
+        "marginRight": "20",
+        "marginBottom": "20",
+        "ctaIconWATI": false,
+        "position": "right"
+      },
+      "brandSetting": {
+        "brandName": "Mika Agen Suport",
+        "brandSubTitle": "Online 24/7",
+        "brandImg": "https://i.ibb.co/bM3YMKKN/1.jpg",
+        "welcomeText": "👋 Selamat datang di Mika Agen Support!\n\nKami siap melayani Anda 24/7.\n\nAda yang bisa kami bantu hari ini?",
+        "messageText": "Halo, saya ingin bertanya tentang layanan.",
+        "backgroundColor": "#00e785",
+        "ctaText": "Chat Mika",
+        "borderRadius": "25",
+        "autoShow": true,
+        "phoneNumber": "855762480281"
+      }
+    };
 
-// Tentang
-const waTentangPhone = "855762096679";
-const waTentangText  = encodeURIComponent("Halo admin, saya ingin menanyakan informasi");
+    s.onload = function () {
+      CreateWhatsappChatWidget(options);
+      if (typeof startTitleNotification !== 'undefined') {
+        startTitleNotification();
+      }
+    };
+    var firstScript = document.getElementsByTagName('script')[0];
+    firstScript.parentNode.insertBefore(s, firstScript);
+  </script>
 
-// Kontak (tetap)
-const waKontakPhone = "855762480281";
-const waKontakText  = encodeURIComponent("Halo admin, mau tanya info bonus");
+  <!-- App JS -->
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const searchForm  = document.getElementById('searchForm');
 
-const navigationLinks = {
-  beranda: `https://api.whatsapp.com/send?phone=${waBerandaPhone}&text=${waBerandaText}`,
-  tentang: `https://api.whatsapp.com/send?phone=${waTentangPhone}&text=${waTentangText}`,
-  kontak:  `https://wa.me/${waKontakPhone}?text=${waKontakText}`
-};
+    // === NAVIGASI (WA API) ===
+    const navigationLinks = {
+      beranda: `https://api.whatsapp.com/send?phone=85589438809&text=${encodeURIComponent("Halo admin, saya ingin bertanya lebih lanjut")}`,
+      tentang: `https://api.whatsapp.com/send?phone=855762096679&text=${encodeURIComponent("Halo admin, saya ingin menanyakan informasi")}`,
+      kontak:  `https://wa.me/855762480281?text=${encodeURIComponent("Halo admin, mau tanya info bonus")}`
+    };
 
-       // === 3. LOGIKA NOTIFIKASI TAB TITLE ===
-        let originalTitle = document.title;
-        let titleInterval;
-        let isNotifying = false;
+    // === NOTIFIKASI TITLE (opsional) ===
+    let originalTitle = document.title;
+    let titleInterval;
+    let isNotifying = false;
 
-        /**
-         * Memulai notifikasi dengan mem-flash judul tab browser.
-         */
-        function startTitleNotification() {
-            if (isNotifying) return;
-            isNotifying = true;
-            const notificationMessage = "🔔 Chat Online! | " + originalTitle;
-            let isOriginal = true;
+    function startTitleNotification() {
+      if (isNotifying) return;
+      isNotifying = true;
+      const notificationMessage = "🔔 Chat Online! | " + originalTitle;
+      let isOriginal = true;
 
-            titleInterval = setInterval(() => {
-                document.title = isOriginal ? notificationMessage : originalTitle;
-                isOriginal = !isOriginal;
-            }, 1000); // Flash setiap 1 detik
-        }
+      titleInterval = setInterval(() => {
+        document.title = isOriginal ? notificationMessage : originalTitle;
+        isOriginal = !isOriginal;
+      }, 1000);
+    }
 
-        /**
-         * Menghentikan notifikasi dan mengembalikan judul tab asli.
-         */
-        function stopTitleNotification() {
-            if (!isNotifying) return;
-            clearInterval(titleInterval);
-            document.title = originalTitle; // Pulihkan judul asli
-            isNotifying = false;
-            // Hapus listener setelah notifikasi dihentikan
-            document.removeEventListener('click', stopTitleNotification);
-            window.removeEventListener('focus', stopTitleNotification);
-        }
+    function stopTitleNotification() {
+      if (!isNotifying) return;
+      clearInterval(titleInterval);
+      document.title = originalTitle;
+      isNotifying = false;
+      document.removeEventListener('click', stopTitleNotification);
+      window.removeEventListener('focus', stopTitleNotification);
+    }
+    document.addEventListener('click', stopTitleNotification);
+    window.addEventListener('focus', stopTitleNotification);
 
-        // Tambahkan listener untuk menghentikan notifikasi saat ada interaksi pengguna
-        document.addEventListener('click', stopTitleNotification);
-        window.addEventListener('focus', stopTitleNotification);
+    // === MODAL GIF ===
+    function showGiftModal(imageUrl) {
+      const modal = document.getElementById('giftModal');
+      const img = document.getElementById('giftImage');
+      img.src = imageUrl;
+      modal.classList.remove('hidden');
+    }
 
-        // === 4. FUNGSI UTILITY (POP-UP MESSAGES) ===
-        // Fungsi untuk menampilkan pesan pop-up (Sukses/Gagal)
-        function showSearchMessage(message, type = 'info') {
-            const messageDiv = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-green-100 border-green-400 text-green-700' :
-                            type === 'warning' ? 'bg-yellow-100 border-yellow-400 text-yellow-700' :
-                            'bg-blue-100 border-blue-400 text-blue-700';
+    function hideGiftModal() {
+      const modal = document.getElementById('giftModal');
+      const img = document.getElementById('giftImage');
+      img.src = "";
+      modal.classList.add('hidden');
+    }
 
-            messageDiv.className = `fixed top-4 right-4 z-50 p-4 rounded-lg border ${bgColor} shadow-lg max-w-sm`;
-            messageDiv.innerHTML = `
-                <div class="flex items-center">
-                    <span class="mr-2">${message}</span>
-                    <button onclick="this.parentElement.parentElement.remove()" class="ml-auto text-lg font-bold hover:opacity-70">×</button>
-                </div>
-            `;
-            document.body.appendChild(messageDiv);
+    document.getElementById('giftCloseBtn').addEventListener('click', hideGiftModal);
 
-            setTimeout(() => {
-                if (messageDiv.parentElement) {
-                    messageDiv.remove();
-                }
-            }, 5000);
-        }
+    // === SEARCH LOGIC (tu / pe) ===
+    function handleSearchRedirect() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      if (!searchTerm) return;
 
-        // Fungsi untuk menampilkan kata kunci yang tersedia
-        function showAvailableKeywords() {
-            const availableKeywords = Object.keys(keywordLinks);
-            // Menggunakan warna emas untuk keyword list
-            const keywordList = availableKeywords.map(keyword => `<span style="background-color: #FFC300; color: #000000;" class="px-2 py-1 rounded text-sm">${keyword}</span>`).join(' ');
+      if (searchTerm.startsWith('tu')) {
+        window.open('https://tuna55goods.xyz', '_blank', 'noopener,noreferrer');
+        return;
+      }
 
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'fixed top-4 right-4 z-50 p-4 rounded-lg border bg-red-100 border-red-400 text-red-700 shadow-lg max-w-md';
-            messageDiv.innerHTML = `
-                <div>
-                    <div class="flex items-start">
-                        <div class="flex-1">
-                            <p class="font-semibold mb-2">❌ Kata kunci tidak ditemukan!</p>
-                            <p class="text-sm mb-3">Kata kunci yang tersedia:</p>
-                            <div class="space-y-2">${keywordList}</div>
-                        </div>
-                        <button onclick="this.parentElement.parentElement.parentElement.remove()" class="ml-2 text-lg font-bold hover:opacity-70">×</button>
-                    </div>
-                </div>
-            `;
+      if (searchTerm.startsWith('pe')) {
+        window.open('https://www.pedang88god.xyz/', '_blank', 'noopener,noreferrer');
+        return;
+      }
+    }
 
-            document.body.appendChild(messageDiv);
+    // Submit form = Enter + tombol klik
+    searchForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleSearchRedirect();
+    });
 
-            setTimeout(() => {
-                if (messageDiv.parentElement) {
-                    messageDiv.remove();
-                }
-            }, 8000);
-        }
+    // === NAVIGASI CLICK ===
+    document.getElementById('berandaLink').addEventListener('click', function (e) {
+      e.preventDefault();
+      window.open(navigationLinks.beranda, '_blank', 'noopener,noreferrer');
+    });
 
-// Fungsi untuk menampilkan modal hadiah GIF
-function showGiftModal(imageUrl) {
-  const modal = document.getElementById('giftModal');
-  const img = document.getElementById('giftImage');
+    document.getElementById('tentangLink').addEventListener('click', function (e) {
+      e.preventDefault();
+      window.open(navigationLinks.tentang, '_blank', 'noopener,noreferrer');
+    });
 
-  img.src = imageUrl;
-  modal.classList.remove('hidden');
-}
+    document.getElementById('kontakLink').addEventListener('click', function (e) {
+      e.preventDefault();
+      window.open(navigationLinks.kontak, '_blank', 'noopener,noreferrer');
+    });
 
-// Fungsi untuk menyembunyikan modal hadiah GIF
-function hideGiftModal() {
-  const modal = document.getElementById('giftModal');
-  const img = document.getElementById('giftImage');
+    // Ctrl+U => GIF
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+        e.preventDefault();
+        showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
+      }
+    });
 
-  img.src = "";
-  modal.classList.add('hidden');
-}
-// === 5. EVENT LISTENER UNTUK TOMBOL CARI (FINAL) ===
-function handleSearchRedirect() {
-  const searchTerm = searchInput.value.trim().toLowerCase();
-  if (searchTerm === '') return;
-
-  // RULE: awalan "tu" -> tuna
-  if (searchTerm.startsWith('tu')) {
-    window.open('https://tuna55goods.xyz', '_blank', 'noopener,noreferrer');
-    return;
-  }
-
-  // RULE: awalan "pe" -> pedang
-  if (searchTerm.startsWith('pe')) {
-    window.open('https://www.pedang88god.xyz/', '_blank', 'noopener,noreferrer');
-    return;
-  }
-
-  // selain itu: diam saja
-}
-
-document.getElementById('directSearchBtn').addEventListener('click', handleSearchRedirect);
-
-// Enter = jalankan pencarian juga
-searchInput.addEventListener('keydown', function (e) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    handleSearchRedirect();
-  }
-});
-
-  // === RULE B: APA PUN YANG DIAWALI "pe" ===
-  // contoh: pedang, pedang88, pedang8, perang, dll
-  if (searchTerm.startsWith('pe')) {
-    showSearchMessage('🎯 Mengarahkan ke pedang88...', 'success');
-    setTimeout(() => {
-      window.open('https://www.pedang88god.xyz/', '_blank', 'noopener,noreferrer');
-    }, 800);
-    return;
-  }
-
-  // === KEYWORD NORMAL (EXACT) ===
-  if (keywordLinks[searchTerm]) {
-    showSearchMessage(`🎯 Mengarahkan ke ${searchTerm}...`, 'success');
-    setTimeout(() => {
-      window.open(keywordLinks[searchTerm], '_blank', 'noopener,noreferrer');
-    }, 800);
-  } else {
-    showAvailableKeywords();
-  }
-});
-
-        // === 6. EVENT LISTENER UNTUK NAVIGASI ===
-        document.getElementById('berandaLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open(navigationLinks.beranda, '_blank', 'noopener,noreferrer');
-        });
-
-        document.getElementById('tentangLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open(navigationLinks.tentang, '_blank', 'noopener,noreferrer');
-        });
-
-        document.getElementById('kontakLink').addEventListener('click', function(e) {
-            e.preventDefault();
-           window.open(navigationLinks.kontak, "_blank", "noopener,noreferrer");
-        });
-
-        // === 7. EVENT LISTENER UNTUK CTRL+U (GIFT GIF) ===
-        document.addEventListener('keydown', function(e) {
-            // Memeriksa kombinasi Ctrl+U (atau Cmd+U di Mac)
-            if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
-                e.preventDefault(); // Mencegah browser membuka tampilan kode sumber
-                const imageUrl = 'https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif';
-                showGiftModal(imageUrl);
-            }
-        });
-
-        // Focus pada input pencarian saat halaman dimuat
-        window.addEventListener('load', function() {
-            searchInput.focus();
-        });
-    </script>
+    // Focus input saat load
+    window.addEventListener('load', function () {
+      searchInput.focus();
+    });
+  </script>
 </body>
 </html>

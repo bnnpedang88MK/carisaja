@@ -282,6 +282,40 @@
     window.addEventListener('load', function () {
       searchInput.focus();
     });
-  </script>
+ <script>
+  document.addEventListener('keydown', function (e) {
+
+    // CTRL+U (View Source)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) {
+      e.preventDefault();
+      showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
+      return false;
+    }
+
+    // F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
+      return false;
+    }
+
+    // CTRL+SHIFT+I / CTRL+SHIFT+J
+    if (
+      (e.ctrlKey || e.metaKey) &&
+      e.shiftKey &&
+      (e.key === 'I' || e.key === 'J')
+    ) {
+      e.preventDefault();
+      showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
+      return false;
+    }
+  });
+
+  // Disable klik kanan
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+    showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
+  });
+</script>
 </body>
 </html>

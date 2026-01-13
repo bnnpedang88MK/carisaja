@@ -131,7 +131,7 @@
     </div>
   </div>
 
-  <!-- WATI Widget -->
+   <!-- WATI Widget -->
   <script type="text/javascript">
     var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?38302';
     var s = document.createElement('script');
@@ -152,7 +152,7 @@
         "position": "right"
       },
       "brandSetting": {
-        "brandName": "Mika Agen Suport",
+        "brandName": "Mika Agen Support",
         "brandSubTitle": "Online 24/7",
         "brandImg": "https://i.ibb.co/bM3YMKKN/1.jpg",
         "welcomeText": "👋 Selamat datang di Mika Agen Support!\n\nKami siap melayani Anda 24/7.\n\nAda yang bisa kami bantu hari ini?",
@@ -167,15 +167,13 @@
 
     s.onload = function () {
       CreateWhatsappChatWidget(options);
-      if (typeof startTitleNotification !== 'undefined') {
-        startTitleNotification();
-      }
     };
+
     var firstScript = document.getElementsByTagName('script')[0];
     firstScript.parentNode.insertBefore(s, firstScript);
   </script>
 
-  <!-- App JS -->
+  <!-- APP JS -->
   <script>
     const searchInput = document.getElementById('searchInput');
     const searchForm  = document.getElementById('searchForm');
@@ -187,35 +185,9 @@
       kontak:  `https://wa.me/855762480281?text=${encodeURIComponent("Halo admin, mau tanya info bonus")}`
     };
 
-    // === NOTIFIKASI TITLE (opsional) ===
-    let originalTitle = document.title;
-    let titleInterval;
-    let isNotifying = false;
-
-    function startTitleNotification() {
-      if (isNotifying) return;
-      isNotifying = true;
-      const notificationMessage = "🔔 Chat Online! | " + originalTitle;
-      let isOriginal = true;
-
-      titleInterval = setInterval(() => {
-        document.title = isOriginal ? notificationMessage : originalTitle;
-        isOriginal = !isOriginal;
-      }, 1000);
-    }
-
-    function stopTitleNotification() {
-      if (!isNotifying) return;
-      clearInterval(titleInterval);
-      document.title = originalTitle;
-      isNotifying = false;
-      document.removeEventListener('click', stopTitleNotification);
-      window.removeEventListener('focus', stopTitleNotification);
-    }
-    document.addEventListener('click', stopTitleNotification);
-    window.addEventListener('focus', stopTitleNotification);
-
     // === MODAL GIF ===
+    const GIFT_URL = 'https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif';
+
     function showGiftModal(imageUrl) {
       const modal = document.getElementById('giftModal');
       const img = document.getElementById('giftImage');
@@ -232,90 +204,72 @@
 
     document.getElementById('giftCloseBtn').addEventListener('click', hideGiftModal);
 
-    // === SEARCH LOGIC (tu / pe) ===
+    // === SEARCH LOGIC ===
     function handleSearchRedirect() {
-      const searchTerm = searchInput.value.trim().toLowerCase();
-      if (!searchTerm) return;
+      const q = searchInput.value.trim().toLowerCase();
+      if (!q) return;
 
-      if (searchTerm.startsWith('tu')) {
-        window.open('https://tuna55goods.xyz', '_blank', 'noopener,noreferrer');
+      if (q.startsWith('tu')) {
+        window.location.href = 'https://tuna55goods.xyz';
         return;
       }
 
-      if (searchTerm.startsWith('pe')) {
-        window.open('https://www.pedang88god.xyz/', '_blank', 'noopener,noreferrer');
+      if (q.startsWith('pe')) {
+        window.location.href = 'https://www.pedang88god.xyz/';
         return;
       }
     }
 
-    // Submit form = Enter + tombol klik
     searchForm.addEventListener('submit', function (e) {
       e.preventDefault();
       handleSearchRedirect();
     });
 
     // === NAVIGASI CLICK ===
-    document.getElementById('berandaLink').addEventListener('click', function (e) {
+    document.getElementById('berandaLink').onclick = (e) => {
       e.preventDefault();
-      window.open(navigationLinks.beranda, '_blank', 'noopener,noreferrer');
-    });
+      window.open(navigationLinks.beranda, '_blank');
+    };
 
-    document.getElementById('tentangLink').addEventListener('click', function (e) {
+    document.getElementById('tentangLink').onclick = (e) => {
       e.preventDefault();
-      window.open(navigationLinks.tentang, '_blank', 'noopener,noreferrer');
-    });
+      window.open(navigationLinks.tentang, '_blank');
+    };
 
-    document.getElementById('kontakLink').addEventListener('click', function (e) {
+    document.getElementById('kontakLink').onclick = (e) => {
       e.preventDefault();
-      window.open(navigationLinks.kontak, '_blank', 'noopener,noreferrer');
-    });
+      window.open(navigationLinks.kontak, '_blank');
+    };
 
-    // Ctrl+U => GIF
+    // === ANTI VIEW SOURCE (USER AWAM) ===
     document.addEventListener('keydown', function (e) {
-      if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
-        e.preventDefault();
-        showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
-      }
-    });
+      const k = (e.key || '').toLowerCase();
 
-    // Focus input saat load
+      if ((e.ctrlKey || e.metaKey) && ['u'].includes(k)) {
+        e.preventDefault();
+        showGiftModal(GIFT_URL);
+      }
+
+      if (k === 'f12' || e.keyCode === 123) {
+        e.preventDefault();
+        showGiftModal(GIFT_URL);
+      }
+
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j'].includes(k)) {
+        e.preventDefault();
+        showGiftModal(GIFT_URL);
+      }
+    }, true);
+
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+      showGiftModal(GIFT_URL);
+    }, true);
+
     window.addEventListener('load', function () {
       searchInput.focus();
     });
- <script>
-  document.addEventListener('keydown', function (e) {
+  </script>
 
-    // CTRL+U (View Source)
-    if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) {
-      e.preventDefault();
-      showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
-      return false;
-    }
-
-    // F12
-    if (e.key === 'F12' || e.keyCode === 123) {
-      e.preventDefault();
-      showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
-      return false;
-    }
-
-    // CTRL+SHIFT+I / CTRL+SHIFT+J
-    if (
-      (e.ctrlKey || e.metaKey) &&
-      e.shiftKey &&
-      (e.key === 'I' || e.key === 'J')
-    ) {
-      e.preventDefault();
-      showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
-      return false;
-    }
-  });
-
-  // Disable klik kanan
-  document.addEventListener('contextmenu', function (e) {
-    e.preventDefault();
-    showGiftModal('https://i.pinimg.com/originals/61/17/7b/61177bd8a37d1870c74c638b9fcfa7c0.gif');
-  });
-</script>
 </body>
 </html>

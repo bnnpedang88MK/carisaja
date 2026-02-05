@@ -153,7 +153,7 @@
     s.src = url;
 
     var options = {
-      "enabled": true,
+      "enabled": false,
       "chatButtonSetting": {
         "backgroundColor": "#00e785",
         "ctaText": "Chat Mika",
@@ -179,8 +179,10 @@
     };
 
     s.onload = function () {
-      CreateWhatsappChatWidget(options);
-    };
+      if (WATI_ENABLED) CreateWhatsappChatWidget(options);
+};
+        // CreateWhatsappChatWidget(options); // WATI OFF
+  
 
     var firstScript = document.getElementsByTagName('script')[0];
     firstScript.parentNode.insertBefore(s, firstScript);
@@ -203,7 +205,7 @@ s0.parentNode.insertBefore(s1,s0);
   <!-- APP JS -->
   
   <script>
-    
+    const WATI_ENABLED = false;
     const searchInput = document.getElementById('searchInput');
     const searchForm  = document.getElementById('searchForm');
 
